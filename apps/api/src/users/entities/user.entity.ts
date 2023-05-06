@@ -1,6 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany} from "typeorm"
 import {Post} from "../../posts/entities/post.entity";
 import {PostReaction} from "../../posts/entities/post_reaction.entity";
+import {Comment} from "../../comments/entities/comment.entity";
 
 
 
@@ -49,11 +50,23 @@ export class User {
     @JoinTable()
     followers: User[];
 
+    @ManyToMany(() => Post)
+    @JoinTable()
+    favorite_posts: Post[];
+
+    @ManyToMany(() => Post)
+    @JoinTable()
+    to_watch_later_posts: Post[];
 
     @OneToMany(() => Post, post => post.user)
     posts: Post[];
 
+    @OneToMany(() => Comment, comment => comment.user)
+    comments: Post[];
     @OneToMany(() => PostReaction, reaction => reaction.user)
-    reactions: PostReaction[];
+    post_reactions: PostReaction[];
+
+    @OneToMany(() => PostReaction, reaction => reaction.user)
+    comment_reactions: PostReaction[];
 
 }

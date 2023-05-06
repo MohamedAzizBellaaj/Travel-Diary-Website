@@ -11,7 +11,7 @@ export enum PostReactType  {
 @Entity("post_reaction")
 @Index(["user", "post"], { unique: true })
 export class PostReaction {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number;
 
     @Column({
@@ -19,7 +19,7 @@ export class PostReaction {
     })
     type: PostReactType;
 
-    @ManyToOne(() => User, user => user.reactions)
+    @ManyToOne(() => User, user => user.post_reactions)
     user: User;
 
     @ManyToOne(() => Post, post => post.reactions)

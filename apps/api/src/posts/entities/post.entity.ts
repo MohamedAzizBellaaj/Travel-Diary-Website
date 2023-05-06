@@ -1,7 +1,9 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany, Index} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn,  ManyToOne, OneToMany} from "typeorm"
 import {User} from "../../users/entities/user.entity";
 import {PostImage} from "./post_image.entity";
 import {PostReaction} from "./post_reaction.entity";
+import {Comment} from "../../comments/entities/comment.entity";
+import {PostTag} from "./post_tags.entity";
 
 
 
@@ -30,6 +32,14 @@ export class Post {
 
     @OneToMany(() => PostReaction, reaction => reaction.post)
     reactions: PostReaction[];
+
+    @OneToMany(() => Comment, comment => comment.post)
+    comments: Comment[];
+
+
+    @OneToMany(() => PostTag, tag => tag.post)
+    tags: PostTag[];
+
 
 }
 

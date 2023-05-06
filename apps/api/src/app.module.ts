@@ -12,6 +12,10 @@ import {User} from "./users/entities/user.entity";
 import {Post} from "./posts/entities/post.entity";
 import {PostReaction} from "./posts/entities/post_reaction.entity";
 import {PostImage} from "./posts/entities/post_image.entity";
+import { CommentsModule } from './comments/comments.module';
+import {Comment} from "./comments/entities/comment.entity";
+import {CommentReaction} from "./comments/entities/comment_reaction.entity";
+import {PostTag} from "./posts/entities/post_tags.entity";
 
 @Module({
   imports: [
@@ -29,15 +33,15 @@ import {PostImage} from "./posts/entities/post_image.entity";
             host: process.env.DB_HOST,
             port: 3306,
             username:"root",
-            // password:"",
             database: process.env.DATABASE,
             synchronize: true,
-            entities:[User,Post,PostReaction,PostImage],
+            entities:[User,Post,PostReaction,PostImage,Comment,CommentReaction,PostTag],
             logging:true
           }
       ),
       UsersModule,
-      PostsModule
+      PostsModule,
+      CommentsModule
   ],
   controllers: [AppController],
   providers: [AppService],
