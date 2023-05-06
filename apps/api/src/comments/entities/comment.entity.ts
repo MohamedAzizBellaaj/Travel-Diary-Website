@@ -1,7 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, ManyToOne} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn,  OneToMany, ManyToOne} from "typeorm"
 import {User} from "../../users/entities/user.entity";
 import {Post} from "../../posts/entities/post.entity";
-import {PostReaction} from "../../posts/entities/post_reaction.entity";
 import {CommentReaction} from "./comment_reaction.entity";
 
 

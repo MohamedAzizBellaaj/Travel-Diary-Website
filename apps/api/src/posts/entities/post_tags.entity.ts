@@ -1,4 +1,4 @@
-import {Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity,  ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Post} from "./post.entity";
 
 @Entity("post_tags")
