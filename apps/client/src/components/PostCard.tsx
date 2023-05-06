@@ -9,14 +9,14 @@ export interface PostCardProps {
 
 function PostCard({ post }: PostCardProps) {
   const { title, images, text, user, tags } = post;
+  const truncatedText = text?.slice(0, 300) + '...';
   const { userName, avatar } = { ...user };
   return (
     <Box
-      borderWidth='1px'
-      borderRadius='lg'
+      borderRadius='2xl'
       overflow='hidden'
       boxShadow='lg'
-      maxW='sm'
+      maxW='lg'
       position='relative'
       transition='all 0.2s ease-out'
       margin='2'
@@ -30,8 +30,9 @@ function PostCard({ post }: PostCardProps) {
       )}
       <Box
         position='absolute'
-        top='1'
-        left='1'
+        padding='2'
+        top='0'
+        left='1.5'
       >
         <Avatar
           size='md'
@@ -53,10 +54,11 @@ function PostCard({ post }: PostCardProps) {
         color='white'
         opacity='0'
         transition='all 0.2s ease-out'
-        _hover={{ opacity: '1' }}
+        _hover={{ opacity: '1', cursor: 'pointer' }}
       >
         <Text
           marginTop='2'
+          fontSize='lg'
           color='#33CCCC'
         >
           {userName} wrote:
@@ -64,16 +66,17 @@ function PostCard({ post }: PostCardProps) {
         <Text
           alignSelf='center'
           fontWeight='bold'
-          fontSize='xl'
+          fontSize='2xl'
           marginBottom='2'
         >
           {title}
         </Text>
         <Text
           color='yellow.500'
+          fontSize='xl'
           textShadow='1px 1px 2px rgba(0, 0, 0, 0.4)'
         >
-          {text}
+          {truncatedText}
         </Text>
         {tags && (
           <Box marginTop='4'>
@@ -84,7 +87,7 @@ function PostCard({ post }: PostCardProps) {
                 borderRadius='full'
                 bg='#33CCCC'
                 color='white'
-                fontSize='xs'
+                fontSize='md'
                 fontWeight='bold'
                 padding='2'
                 marginRight='2'
