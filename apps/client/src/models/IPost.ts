@@ -10,5 +10,5 @@ export default interface IPost {
   user?: IUser;
   location?: string;
   comment?: IComment[];
-  tag?: ITag[];
+  tags?: ITag[];
 }
