@@ -2,6 +2,7 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany
 import {Post} from "../../posts/entities/post.entity";
 import {PostReaction} from "../../posts/entities/post_reaction.entity";
 import {Comment} from "../../comments/entities/comment.entity";
+import {CommentReaction} from "../../comments/entities/comment_reaction.entity";
 
 
 
@@ -32,7 +33,7 @@ export class User {
     bio: string;
 
     @Column({
-        type: "varchar"
+        type: "varchar",unique:true
     })
     mail: string;
 
@@ -62,11 +63,11 @@ export class User {
     posts: Post[];
 
     @OneToMany(() => Comment, comment => comment.user)
-    comments: Post[];
+    comments: Comment[];
     @OneToMany(() => PostReaction, reaction => reaction.user)
     post_reactions: PostReaction[];
 
-    @OneToMany(() => PostReaction, reaction => reaction.user)
-    comment_reactions: PostReaction[];
+    @OneToMany(() => CommentReaction, reaction => reaction.user)
+    comment_reactions: CommentReaction[];
 
 }
