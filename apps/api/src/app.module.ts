@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
@@ -16,6 +16,9 @@ import { CommentsModule } from './comments/comments.module';
 import {Comment} from "./comments/entities/comment.entity";
 import {CommentReaction} from "./comments/entities/comment_reaction.entity";
 import {PostTag} from "./posts/entities/post_tags.entity";
+import { AuthModule } from './auth/auth.module';
+import {AuthentificationMiddleware} from "./authentification/authentification.middleware";
+import {Token} from "./auth/entities/auth.entity";
 
 @Module({
   imports: [
@@ -35,15 +38,23 @@ import {PostTag} from "./posts/entities/post_tags.entity";
             username:"root",
             database: process.env.DATABASE,
             synchronize: true,
-            entities:[User,Post,PostReaction,PostImage,Comment,CommentReaction,PostTag],
+            entities:[User,Post,PostReaction,PostImage,Comment,CommentReaction,PostTag,Token],
             logging:true
           }
       ),
       UsersModule,
       PostsModule,
-      CommentsModule
+      CommentsModule,
+      AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule  implements NestModule  {
+    configure(consumer: MiddlewareConsumer) {
+        consumer
+            .apply(AuthentificationMiddleware).exclude("/auth/logout","/auth/login","/auth/refresh_token")
+            .forRoutes("/");
+    }
+
+}
