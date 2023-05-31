@@ -57,6 +57,8 @@ function Feed({ children }: FeedProps) {
     tags: tags,
     createdAt: new Date(),
   };
+  const posts = new Array(8).fill(post);
+  const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <>
       <AddPost />
@@ -65,10 +67,7 @@ function Feed({ children }: FeedProps) {
         alignItems='center'
         justifyContent='center'
       >
-        <PostCard post={post} />
-        <PostCard post={post} />
-        <PostCard post={post} />
-        <PostCard post={post} />
+        {postElements}
       </Flex>
     </>
   );

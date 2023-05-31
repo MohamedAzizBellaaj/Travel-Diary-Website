@@ -44,8 +44,8 @@ function Navbar(props) {
   return (
     <>
       <Button
-        width={'10vw'}
-        bg={'rgb(230,239,246)'}
+        width='10vw'
+        bg='rgb(230,239,246)'
         bottom={5}
         left={'3%'}
         position={'fixed'}
@@ -84,10 +84,12 @@ function Navbar(props) {
               image={city}
               title={'WishList'}
             />
-            <NavBarIcon
-              image={user}
-              title={'Account'}
-            />
+            <Link to='/'>
+              <NavBarIcon
+                image={user}
+                title={'Profile'}
+              />
+            </Link>
             <Link to='/'>
               <NavBarIcon
                 image={house}
