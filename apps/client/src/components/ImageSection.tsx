@@ -1,8 +1,8 @@
 
-import ImageContainer from '../ImageContainer/ImageContainer';
+import ImageContainer from './ImageContainer';
 
-import PostCard from "../PostCard";
-import SectionTitle from '../SectionTitle/SectionTitle';
+import PostCard from "./PostCard";
+import SectionTitle from './SectionTitle';
 
 
 
@@ -15,10 +15,7 @@ const ImageSection = ({ posts }) => {
 >
               {posts.map((item) => (
                   <PostCard
-                      key={item.title}
-                      title={item.title}
-                      text={item.text}
-                      images={[item.image]} />
+                      post={item} />
               ))}
           </ImageContainer></>
   );

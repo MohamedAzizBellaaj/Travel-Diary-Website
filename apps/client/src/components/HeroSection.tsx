@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
-import heroImage  from '../../assets/hero.png';
-import Header from '../header/Header';
-import HeroText from '../HeroText/HeroText';
+import heroImage  from '../assets/hero.png';
+import Header from './Header';
+import HeroText from './HeroText';
 
 function HeroSection() {
   return (
