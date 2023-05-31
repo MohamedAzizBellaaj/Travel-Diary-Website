@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Req, Request, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Post, Req, Request, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {CreateUserDto} from "../users/dto/create-user.dto";
 import {LocalAuthGuard} from "./local-auth.guard";
@@ -22,11 +22,11 @@ export class AuthController {
 
     @Post('register')
     async register(
-        @Body() body: { createUserDto: CreateUserDto },
+        @Body()  createUserDto: CreateUserDto ,
     ): Promise<{}> {
-        console.log(body)
+        console.log(createUserDto)
         // @ts-ignore
-        return await this.authService.register(body);
+        return await this.authService.register(createUserDto);
     }
 
     @UseGuards(AuthGuard)
