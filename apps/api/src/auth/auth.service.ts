@@ -21,6 +21,7 @@ export class AuthService {
         const user = await this.userService.findByEmail(email);
         console.log(user.password)
         console.log(password)
+
         const res = await compare(password,user.password)
 
         if (user && res) {
@@ -34,10 +35,6 @@ export class AuthService {
         await this.tokenRepository.save({access_token:token})
     }
 
-    async validateToken(token:string){
-        return await this.tokenRepository.exist({where:{access_token: token}})
-    }
-
 
     async login(user:User): Promise<{ access_token: string }> {
         const payload = { email: user.mail, userId: user.id };
@@ -49,11 +46,14 @@ export class AuthService {
     }
 
     async register(user: CreateUserDto) {
-        console.log(user.password)
+        const _user = await this.userService.emailExist(user.mail);
+        if(!_user){
+            throw new NotAcceptableException("User Already exists")
+        }
         user.password = await hash(user.password, 10);
         const newUser = await this.userService.create(user);
-
-        return "Logged in Successfully"
+        return {message:"User Registered Successfully",newUser
+        }
     }
     async delete(token: string) {
         return this.tokenRepository.delete({access_token:token})
