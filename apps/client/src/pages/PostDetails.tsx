@@ -15,7 +15,7 @@ import {
 import IUser from '../models/IUser';
 import IComment from '../models/IComment';
 import ITag from '../models/ITag';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ImageCarousel from '../components/ImageCarousel';
 
 interface PostDetailsProps {
@@ -26,6 +26,7 @@ function PostDetails({ children }: PostDetailsProps) {
   const { id } = useParams();
   // Fetch post using id
   const user: IUser = {
+    id: 1,
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',
     lastName: 'El Chebi',
@@ -96,15 +97,17 @@ function PostDetails({ children }: PostDetailsProps) {
           objectFit='cover'
         />
         <Flex flexDirection='row'>
-          <Avatar
-            height='120'
-            width='120'
-            name={userName}
-            src={avatar}
-            bottom='12'
-            left='-3'
-            marginRight='4'
-          />
+          <Link to={`/profile/${user.id}`}>
+            <Avatar
+              height='120'
+              width='120'
+              name={userName}
+              src={avatar}
+              bottom='12'
+              left='-3'
+              marginRight='4'
+            />
+          </Link>
           <Box marginRight='auto'>
             <Text>
               {firstName} {lastName} (@{userName})

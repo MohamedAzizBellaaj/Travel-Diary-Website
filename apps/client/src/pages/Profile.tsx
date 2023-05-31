@@ -1,36 +1,30 @@
 import { ReactNode } from 'react';
-import IPost from '../models/IPost';
 import eiffelTower from '../assets/eiffel-tower.webp';
 import avatar_image from '../assets/avatar.jpg';
 
-import {
-  Avatar,
-  Box,
-  Divider,
-  Flex,
-  HStack,
-  Image,
-  Text,
-} from '@chakra-ui/react';
+import { Avatar, Box, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import IUser from '../models/IUser';
+import { Link, useParams } from 'react-router-dom';
 import IComment from '../models/IComment';
+import IPost from '../models/IPost';
 import ITag from '../models/ITag';
-import { useParams } from 'react-router-dom';
-import ImageCarousel from '../components/ImageCarousel';
+import PostCard from '../components/PostCard';
 
 interface ProfileProps {
   children?: ReactNode;
 }
 
 function Profile({ children }: ProfileProps) {
-  const { user_id } = useParams();
-  // Fetch post using user_id
+  const { id } = useParams();
+  // Fetch post using id
   const user: IUser = {
+    id: 1,
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',
     lastName: 'El Chebi',
     bio: 'كي الزير المتكي، لا إضحك لايبكي. عريان الترمة في صبعو خاتم. سارق في يدو شمعة. عزوزة شدت سارق. بات يحلم بعنبة، مات جابولوا عنقود. تعلم الحجامة على ريوس الإتاماء. الفم الحارك، الزك البارك.',
     avatar: avatar_image,
+    backgroundImage: eiffelTower,
   };
   const comments: IComment[] = [
     {
@@ -68,14 +62,10 @@ function Profile({ children }: ProfileProps) {
     tags: tags,
     createdAt: new Date(),
   };
-  const { title, images, text, location, createdAt } = post;
-  const { userName, firstName, lastName, bio, avatar } = { ...user };
-  const coverImage = images && images[0];
-  const formattedDate = createdAt?.toLocaleDateString('fr-Fr', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  const { userName, firstName, lastName, bio, avatar, backgroundImage } = {
+    ...user,
+  };
+  const coverImage = backgroundImage;
   return (
     <Flex
       flexDirection='column'
@@ -96,15 +86,17 @@ function Profile({ children }: ProfileProps) {
           objectFit='cover'
         />
         <Flex flexDirection='row'>
-          <Avatar
-            height='120'
-            width='120'
-            name={userName}
-            src={avatar}
-            bottom='12'
-            left='-3'
-            marginRight='4'
-          />
+          <Link to={`/profile/${user.id}`}>
+            <Avatar
+              height='120'
+              width='120'
+              name={userName}
+              src={avatar}
+              bottom='12'
+              left='-3'
+              marginRight='4'
+            />
+          </Link>
           <Box marginRight='auto'>
             <Text>
               {firstName} {lastName} (@{userName})
@@ -113,25 +105,8 @@ function Profile({ children }: ProfileProps) {
               borderWidth='1px'
               borderColor='#0F4C81'
             />
-            <Text>{formattedDate}</Text>
           </Box>
-          <HStack
-            spacing='4'
-            align='stretch'
-          >
-            <Text>❤️</Text>
-            <Text>😯</Text>
-            <Text>😡</Text>
-            <Text>👏</Text>
-          </HStack>
         </Flex>
-        <Text
-          color='#0F4C81'
-          textAlign='center'
-          marginBottom='4'
-        >
-          {title}
-        </Text>
         <Box
           padding='5rem 10rem'
           border='2px solid #D2B48C'
@@ -139,9 +114,18 @@ function Profile({ children }: ProfileProps) {
           borderRadius='12rem'
           marginBottom='4'
         >
-          <Text>{text}</Text>
+          <Text>{bio}</Text>
         </Box>
-        <ImageCarousel images={images} />
+        <Flex
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <PostCard post={post} />
+          <PostCard post={post} />
+          <PostCard post={post} />
+          <PostCard post={post} />
+        </Flex>
       </Box>
     </Flex>
   );
