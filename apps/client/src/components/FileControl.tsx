@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Box, Input, FormControl, FormLabel, Image } from '@chakra-ui/react';
+import { Box,  FormControl, Image } from '@chakra-ui/react';
+import { FileInput } from '.';
 
-function ImageInput({ onChange }) {
+function FileControl({ onChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
@@ -9,8 +10,6 @@ function ImageInput({ onChange }) {
     const file = event.target.files[0];
     setSelectedFile(file);
     onChange(file);
-
-    // Generate preview URL
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result);
@@ -20,17 +19,19 @@ function ImageInput({ onChange }) {
 
   return (
     <FormControl>
-      <FormLabel>Upload Image</FormLabel>
-      <Box borderWidth="1px" p="2" rounded="md">
-        <Input type="file" onChange={handleFileChange} />
-      </Box>
+      
       {previewUrl && (
         <Box mt="2">
-          <Image src={previewUrl} alt="Preview" boxSize="200px" objectFit="cover" />
+             <Image borderRadius='full' boxSize='150px' src={previewUrl} alt="Preview" objectFit="cover" />     
         </Box>
       )}
+
+
+      <FileInput changeHandler={handleFileChange}/>
+
+      
     </FormControl>
   );
 }
 
-export default ImageInput;
+export default FileControl;

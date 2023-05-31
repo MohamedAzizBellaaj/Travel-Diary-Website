@@ -24,15 +24,12 @@ export function Sign() {
   </TabList>
   <TabPanels>
     <TabPanel>
-
-
       <SignInForm />
-
       
     </TabPanel>
     <TabPanel>
 
-    {/* <SignUpForm/> */}
+    <SignUpForm/>
 
 
     </TabPanel>

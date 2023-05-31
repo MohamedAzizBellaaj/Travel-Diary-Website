@@ -1,6 +1,7 @@
 import {  useState } from 'react';
-import { PasswordInput, FormButton } from '.';
+import { PasswordInput, FormButton, AvatarInput } from '.';
 import { TextInput } from './TextInput';
+import { Image } from '@chakra-ui/react'
 // import { Textarea } from '@chakra-ui/react';
 interface FormState {
   firstName:string,
@@ -21,7 +22,7 @@ export function SignUpForm() {
     email: '',
     password: '',
     bio: '',
-    avatar: '',
+    avatar: null ,
   });
 
 
@@ -32,17 +33,18 @@ export function SignUpForm() {
       [e.target.name]: e.target.value,
       
     }));
-    // console.log(e.target.value);
 
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formState.email)
+    // console.log(formState.email)
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
+   
+      <AvatarInput value={formState.email}/> 
       <TextInput value={formState.email} changeHandler={handleChange } type ="email" placeholder='Email address' />
       <TextInput value={formState.userName} changeHandler={handleChange } type ="text" placeholder='Username' />
       <TextInput value={formState.firstName} changeHandler={handleChange } type ="text" placeholder='First name' />
