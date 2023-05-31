@@ -66,6 +66,8 @@ function Profile({ children }: ProfileProps) {
     ...user,
   };
   const coverImage = backgroundImage;
+  const posts = new Array(8).fill(post);
+  const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <Flex
       flexDirection='column'
@@ -121,10 +123,7 @@ function Profile({ children }: ProfileProps) {
           alignItems='center'
           justifyContent='center'
         >
-          <PostCard post={post} />
-          <PostCard post={post} />
-          <PostCard post={post} />
-          <PostCard post={post} />
+          {postElements}
         </Flex>
       </Box>
     </Flex>
