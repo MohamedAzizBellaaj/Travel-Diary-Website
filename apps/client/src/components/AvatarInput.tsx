@@ -6,18 +6,15 @@ import FileControl from './FileControl';
 //   children: ReactNode;
 // }
 // { children }: AvatarInputProps
-const handleImageChange = (file) => {
-  // Do something with the selected file
-  console.log(file);
-};
 
 
-export function AvatarInput() {
+
+export function AvatarInput({changeHandler}) {
   
   return (
     <>
         
-      <FileControl onChange={handleImageChange} />
+      <FileControl onChange={changeHandler} />
           
     </>
   );

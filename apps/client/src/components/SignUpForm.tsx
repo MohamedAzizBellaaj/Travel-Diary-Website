@@ -1,7 +1,7 @@
 import {  useState } from 'react';
-import { PasswordInput, FormButton, AvatarInput } from '.';
+import { PasswordInput, FormButton, AvatarInput, AlotOfText } from '.';
 import { TextInput } from './TextInput';
-import { Image } from '@chakra-ui/react'
+import { FormLabel, Image } from '@chakra-ui/react'
 // import { Textarea } from '@chakra-ui/react';
 interface FormState {
   firstName:string,
@@ -10,7 +10,7 @@ interface FormState {
   email: string,
   password: string,
   bio: string,
-  avatar: string,
+  avatar: File | null
 }
 
 
@@ -24,8 +24,6 @@ export function SignUpForm() {
     bio: '',
     avatar: null ,
   });
-
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     setFormState((prevState) => ({
@@ -33,25 +31,41 @@ export function SignUpForm() {
       [e.target.name]: e.target.value,
       
     }));
+    console.log(formState);
 
   };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(formState.email)
+  };
+  const handleImageChange = (file) => {
+    // Update the form state with the selected file
+    setFormState((prevState) => ({
+      ...prevState,
+      avatar: file,
+    }));
+    console.log(formState.avatar);
+    
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-   
-      <AvatarInput value={formState.email}/> 
-      <TextInput value={formState.email} changeHandler={handleChange } type ="email" placeholder='Email address' />
-      <TextInput value={formState.userName} changeHandler={handleChange } type ="text" placeholder='Username' />
+      <AvatarInput value={formState.avatar} changeHandler={handleImageChange} /> 
+      <FormLabel>First name</FormLabel>
       <TextInput value={formState.firstName} changeHandler={handleChange } type ="text" placeholder='First name' />
+      <FormLabel>Last name</FormLabel>
+
       <TextInput  value={formState.lastName} changeHandler={handleChange }type ="text" placeholder='Last name' />
-      {/* <Textarea placeholder='Tell us about you !' value={formState.bio} onChange={handleChange}/> */}
-      <br />
-      <br />
+      <FormLabel>Username</FormLabel>
+
+
+      <TextInput value={formState.userName} changeHandler={handleChange } type ="text" placeholder='Username' />
+      <FormLabel>bio</FormLabel>
+      <AlotOfText value={formState.bio} changeHandler={handleChange } placeholder='tell us about you !'/> 
+
+      <FormLabel>email</FormLabel>
+      <TextInput value={formState.email} changeHandler={handleChange } type ="email" placeholder='Email address' />
+
+      <FormLabel>password</FormLabel>
       <PasswordInput changeHandler={handleChange} value={formState.password}/>
       <FormButton text="Continue"/>
 

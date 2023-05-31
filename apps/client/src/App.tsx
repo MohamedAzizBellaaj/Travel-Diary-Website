@@ -1,5 +1,6 @@
 import './App.css';
-import { Sign } from './components/Sign';
+import { AddPostForm } from './components';
+import { SignUpIn } from './pages/SignUpIn';
 
 
 
@@ -8,7 +9,8 @@ function App() {
     <>
     {/* <LandingPage/> */}
       {/* <Feed /> */}
-      <Sign  />
+      <SignUpIn  />
+      {/* <AddPostForm /> */}
     </>
   );
 }

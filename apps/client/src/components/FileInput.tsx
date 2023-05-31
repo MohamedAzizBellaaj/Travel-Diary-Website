@@ -1,19 +1,11 @@
 import { Input,Box,Image, Flex } from "@chakra-ui/react";
 import cameraIcon from "../assets/camera-icon.png"
 interface FileInputProps {
-    changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-  
-
-  }
-
-
-
+    changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void }
 
 export function FileInput({changeHandler} : FileInputProps) {
-  
   return (
     <>
-
         <Box borderWidth="1px" p="2" rounded="md">
             <Flex align="center" gap="4">
         <Image  boxSize='16px' src={cameraIcon} alt="icon" objectFit="cover" />   

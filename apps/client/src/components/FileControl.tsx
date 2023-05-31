@@ -10,13 +10,14 @@ function FileControl({ onChange }) {
     const file = event.target.files[0];
     setSelectedFile(file);
     onChange(file);
+  console.log(file);
+
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result);
     };
     fileReader.readAsDataURL(file);
   };
-
   return (
     <FormControl>
       
