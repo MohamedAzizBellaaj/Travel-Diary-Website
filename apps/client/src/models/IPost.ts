@@ -9,6 +9,7 @@ export default interface IPost {
   text?: string;
   user?: IUser;
   location?: string;
-  comment?: IComment[];
-  tag?: ITag[];
+  comments?: IComment[];
+  tags?: ITag[];
+  createdAt?: Date;
 }

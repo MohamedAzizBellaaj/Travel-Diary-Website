@@ -1,5 +1,6 @@
 import './App.css';
-import Feed from './components/Feed';
+import Feed from './pages/Feed';
+
 
 import LandingPage from './components/LandingPage/LandingPage';
 
