@@ -19,8 +19,8 @@ function NavBarIcon(props) {
   return (
     <Box
       borderRadius='30'
-      width={'5vw'}
-      _hover={{ transform: 'scale(1.4) ', margin: '0 40px' }}
+      width='5vw'
+      _hover={{ transform: 'scale(1.4)', margin: '0 40px' }}
       transition='all 0.2s ease'
       display='flex'
       flexDirection={'column'}
@@ -34,7 +34,6 @@ function NavBarIcon(props) {
         fontWeight={'bold'}
         p={'5px'}
       >
-        {' '}
         {props.title}
       </Text>
     </Box>

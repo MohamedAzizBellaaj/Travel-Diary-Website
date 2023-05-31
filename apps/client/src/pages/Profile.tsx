@@ -18,13 +18,13 @@ import ITag from '../models/ITag';
 import { useParams } from 'react-router-dom';
 import ImageCarousel from '../components/ImageCarousel';
 
-interface PostDetailsProps {
+interface ProfileProps {
   children?: ReactNode;
 }
 
-function PostDetails({ children }: PostDetailsProps) {
-  const { id } = useParams();
-  // Fetch post using id
+function Profile({ children }: ProfileProps) {
+  const { user_id } = useParams();
+  // Fetch post using user_id
   const user: IUser = {
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',
@@ -147,4 +147,4 @@ function PostDetails({ children }: PostDetailsProps) {
   );
 }
 
-export default PostDetails;
+export default Profile;

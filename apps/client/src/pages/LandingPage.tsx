@@ -6,7 +6,6 @@ import IPost from '../models/IPost';
 import ITag from '../models/ITag';
 import IUser from '../models/IUser';
 import avatar from '../assets/avatar.jpg';
-import Navbar from '../components/Navbar';
 
 const user: IUser = {
   userName: 'xXKyle420Xx',

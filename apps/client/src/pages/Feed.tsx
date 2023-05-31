@@ -7,6 +7,7 @@ import IPost from '../models/IPost';
 import ITag from '../models/ITag';
 import IComment from '../models/IComment';
 import PostCard from '../components/PostCard';
+import AddPost from '../components/AddPost';
 
 interface FeedProps {
   children?: ReactNode;
@@ -58,6 +59,7 @@ function Feed({ children }: FeedProps) {
   };
   return (
     <>
+      <AddPost />
       <Flex
         flexDirection='column'
         alignItems='center'
