@@ -1,14 +1,14 @@
 import './App.css';
-import Feed from './pages/Feed';
+import { Sign } from './components/Sign';
 
 
-import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
     <>
-    <LandingPage/>
+    {/* <LandingPage/> */}
       {/* <Feed /> */}
+      <Sign  />
     </>
   );
 }
