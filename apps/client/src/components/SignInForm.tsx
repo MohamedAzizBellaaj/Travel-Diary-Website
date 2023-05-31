@@ -32,7 +32,7 @@ export function SignInForm() {
   return (
     <> 
     <form onSubmit={handleSubmit}>
-      <TextInput value={formState.email} changeHandler={handleChange} placeholder='Email address' type='email'/>
+      <TextInput  value={formState.email} changeHandler={handleChange} placeholder='Email address' type='email'/>
       <br />
       <PasswordInput value={formState.password} changeHandler={handleChange}  />
       <br />

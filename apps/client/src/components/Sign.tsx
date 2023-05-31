@@ -32,8 +32,7 @@ export function Sign() {
     </TabPanel>
     <TabPanel>
 
-
-    <SignUpForm/>
+    {/* <SignUpForm/> */}
 
 
     </TabPanel>
