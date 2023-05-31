@@ -13,7 +13,7 @@ function PostCard({ post }: PostCardProps) {
   const truncatedText = text?.slice(0, 300) + '...';
   const { userName, avatar } = { ...user };
   return (
-    <Link to={`/details/:${id}`}>
+    <Link to={`/details/${id}`}>
       <Box
         borderRadius='2xl'
         overflow='hidden'

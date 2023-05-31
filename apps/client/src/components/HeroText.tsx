@@ -24,7 +24,7 @@ export default function HeroText() {
         color='blue.800'
         marginTop='1rem'
       >
-        Discover unique places to stay, experiences to try.{' '}
+        Discover unique places to stay, experiences to try.
       </Text>
     </Flex>
   );

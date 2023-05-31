@@ -12,7 +12,6 @@ function HeroSection() {
       backgroundSize='cover'
       backgroundPosition='center'
       backgroundRepeat='no-repeat'
-
       // position="relative"
     >
       <Header />

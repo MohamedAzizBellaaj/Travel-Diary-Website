@@ -13,6 +13,8 @@ import city from '../assets/navbar_icons/city-hall.png';
 import user from '../assets/navbar_icons/user.png';
 import house from '../assets/navbar_icons/house.png';
 import navBar from '../assets/navbar_icons/menu.png';
+import { Link } from 'react-router-dom';
+
 function NavBarIcon(props) {
   return (
     <Box
@@ -87,10 +89,12 @@ function Navbar(props) {
               image={user}
               title={'Account'}
             />
-            <NavBarIcon
-              image={house}
-              title={'Home'}
-            />
+            <Link to='/'>
+              <NavBarIcon
+                image={house}
+                title={'Home'}
+              />
+            </Link>
           </Box>
         </div>
       </Fade>

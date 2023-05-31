@@ -24,6 +24,7 @@ interface PostDetailsProps {
 function PostDetails({ children }: PostDetailsProps) {
   const { id } = useParams();
   // Fetch post using id
+  console.log(id);
   const user: IUser = {
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',

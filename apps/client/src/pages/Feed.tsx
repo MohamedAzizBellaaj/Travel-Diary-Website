@@ -7,7 +7,6 @@ import IPost from '../models/IPost';
 import ITag from '../models/ITag';
 import IComment from '../models/IComment';
 import PostCard from '../components/PostCard';
-import PostDetails from './PostDetails';
 
 interface FeedProps {
   children?: ReactNode;

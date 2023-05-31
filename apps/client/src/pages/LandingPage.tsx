@@ -6,7 +6,6 @@ import IPost from '../models/IPost';
 import ITag from '../models/ITag';
 import IUser from '../models/IUser';
 import avatar from '../assets/avatar.jpg';
-
 import Navbar from '../components/Navbar';
 
 const user: IUser = {
@@ -53,22 +52,12 @@ const post: IPost = {
 };
 
 const posts = new Array(8).fill(post);
-const posts = new Array(8).fill(post);
 
 export default function LandingPage() {
   return (
     <>
-      <HeroSection />
-      <ImageSection posts={posts} />
-    </>
-  );
-export default function LandingPage() {
-  return (
-    <>
-      <Navbar />
       <HeroSection />
       <ImageSection posts={posts} />
     </>
   );
 }
-
