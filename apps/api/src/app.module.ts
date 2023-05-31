@@ -50,4 +50,5 @@ import {Token} from "./auth/entities/auth.entity";
   providers: [AppService],
 })
 export class AppModule {
+
 }
