@@ -5,8 +5,8 @@ import {UsersModule} from "../users/users.module";
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {User} from "../users/entities/user.entity";
 import {Token} from "./entities/auth.entity";
+import {LocalStrategy} from "./local.strategy";
 
 @Module({
   imports: [
@@ -15,12 +15,13 @@ import {Token} from "./entities/auth.entity";
       global:true,
     secret: "int_to_win",
     signOptions: {
-      expiresIn: 3600,
+      expiresIn: "10s",
     }
-  }),
-  PassportModule.register({defaultStrategy: 'jwt'}),],
+  }),UsersModule,
+  PassportModule
+    ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService,LocalStrategy],
   exports:[AuthService]
 
 })

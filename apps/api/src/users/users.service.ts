@@ -38,7 +38,11 @@ export class UsersService {
     const user =  await this.usersRepository.findOneBy({mail :email })
     return this.handleUser(user)
   }
+  async emailExist(email:string):Promise<boolean>{
+    const user =  await this.usersRepository.findOneBy({mail :email })
+    return user===null
 
+  }
   handleUser(user){
     if(!user) throw new NotFoundException("User not found.");
     return user;
