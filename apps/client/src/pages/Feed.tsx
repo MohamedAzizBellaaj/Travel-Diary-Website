@@ -42,6 +42,7 @@ function Feed({ children }: FeedProps) {
     { id: '4', name: 'Barcha Jaw' },
   ];
   const post: IPost = {
+    id: 42,
     title: 'Paris',
     text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
     images: [
@@ -63,11 +64,10 @@ function Feed({ children }: FeedProps) {
         alignItems='center'
         justifyContent='center'
       >
-        {/* <PostCard post={post} />
         <PostCard post={post} />
         <PostCard post={post} />
-        <PostCard post={post} /> */}
-        <PostDetails post={post} />
+        <PostCard post={post} />
+        <PostCard post={post} />
       </Flex>
     </>
   );
