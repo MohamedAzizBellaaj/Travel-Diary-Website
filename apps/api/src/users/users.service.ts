@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import {PostsService} from "../posts/posts.service";
 
 @Injectable()
 export class UsersService {
@@ -21,6 +22,7 @@ export class UsersService {
 
   async findOne(id: string) {
     const user = await this.usersRepository.findOne({ where: [{ id: id }] });
+    // const posts = this.postService.
     return this.handleUser(user);
   }
 

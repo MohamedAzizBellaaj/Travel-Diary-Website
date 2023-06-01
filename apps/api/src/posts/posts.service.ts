@@ -39,6 +39,10 @@ export class PostsService {
   async findOne(id: string) {
     return await this.postRepository.findOne({ where: [{ id: id }] });
   }
+  async findPostByUser(id: string) {
+    const user = await this.userService.findOne(id)
+    return await this.postRepository.find({ where: { user: user } });
+  }
 
   update(id: number, updatePostDto: UpdatePostDto) {
     return `This action updates a #${id} post`;

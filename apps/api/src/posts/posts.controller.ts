@@ -66,6 +66,12 @@ export class PostsController {
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(id);
   }
+  @Get('user/:id')
+  findByUser(@Param('id') id: string) {
+
+    console.log(id)
+    return this.postsService.findPostByUser(id);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
