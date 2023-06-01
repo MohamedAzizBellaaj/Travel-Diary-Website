@@ -22,7 +22,6 @@ export class UsersService {
 
   async findOne(id: string) {
     const user = await this.usersRepository.findOne({ where: [{ id: id }] });
-    // const posts = this.postService.
     return this.handleUser(user);
   }
 
