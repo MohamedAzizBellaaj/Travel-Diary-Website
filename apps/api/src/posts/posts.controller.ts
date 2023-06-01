@@ -49,10 +49,14 @@ export class PostsController {
     };
   }
   @Get()
-  findAll() {
-    return this.postsService.findAll();
-  }
+  async findAll() {
 
+    return await this.postsService.findAllPostsWithImages();
+  }
+  @Get('all')
+  async findOneWithUserAndImages() {
+    return this.postsService.findAllWithUserAndImages();
+  }
   @Get('getFile')
   getFile(@Res() res) {
     return {
