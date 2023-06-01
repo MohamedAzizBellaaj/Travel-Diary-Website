@@ -44,13 +44,9 @@ export class AuthService {
     };
   }
 
-  async register(user: CreateUserDto, avatar: string, cover: string) {
-    console.log('avatar');
-    console.log(avatar);
-    console.log('cover');
-    console.log(cover);
+  async register(user: CreateUserDto, avatar: string, coverPhoto: string) {
     user.avatar = avatar;
-    user.coverPhoto = cover;
+    user.coverPhoto = coverPhoto;
     const _user = await this.userService.emailExist(user.mail);
     if (!_user) {
       throw new NotAcceptableException('User Already exists');

@@ -15,7 +15,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerDocumentOptions);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('documentation', app, document);
   app.useGlobalPipes(new ValidationPipe({ transform: false, whitelist: true }));
   const staticDir = path.resolve(__dirname, '..', 'uploads');
   app.use('/uploads', express.static(staticDir));
