@@ -26,7 +26,7 @@ export class AuthController {
   async login(
     @Body() body: { mail: string; password: string },
     @Req() req,
-  ): Promise<{}> {
+  ): Promise<any> {
     const token = await this.authService.login(req.user);
     await this.authService.create(token.access_token);
     return token;
