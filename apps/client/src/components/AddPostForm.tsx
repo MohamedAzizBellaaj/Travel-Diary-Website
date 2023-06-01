@@ -27,7 +27,7 @@ export function AddPostForm() {
     text: '',
     country:'',
     images:[null, null,null,null,null],
-    tags:[ ]
+    // tags:[ ]
 
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
