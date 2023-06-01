@@ -36,7 +36,13 @@ export class PostsService {
     return await this.postRepository.find();
   }
 
-
+  async findAllWithUserAndImages(): Promise<Post[]> {
+    return this.postRepository
+        .createQueryBuilder('post')
+        .leftJoinAndSelect('post.user', 'user')
+        .leftJoinAndSelect('post.image', 'image')
+        .getMany();
+  }
   async findAllPostsWithImages(): Promise<Post[]> {
     return await this.postRepository
         .createQueryBuilder('post')
