@@ -1,7 +1,8 @@
 import {  useState } from 'react';
-import { PasswordInput, FormButton, AvatarInput, AlotOfText } from '.';
+import { PasswordInput, FormButton, AlotOfText } from '.';
 import { TextInput } from './TextInput';
 import { FormLabel, Image } from '@chakra-ui/react'
+import FileControl from './FileControl';
 interface FormState {
   firstName:string,
   lastName:string,
@@ -35,6 +36,13 @@ export function SignUpForm() {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formState);
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        alert(JSON.stringify(formState, null, 2))
+        resolve()
+      }, 1000)
+    })
   };
   const handleImageChange = (file) => {
     // Update the form state with the selected file
@@ -43,12 +51,13 @@ export function SignUpForm() {
       avatar: file,
     }));
     console.log(file);
-    console.log(formState);
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-      <AvatarInput name="avatar" value={formState.avatar} changeHandler={handleImageChange} /> 
+      
+      <FileControl  index= {0} onChange={handleImageChange} />
+
       <FormLabel>First name</FormLabel>
       <TextInput name="firstName" value={formState.firstName} changeHandler={handleChange } type ="text" placeholder='First name' />
       <FormLabel>Last name</FormLabel>

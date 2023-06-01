@@ -11,7 +11,7 @@ export function FileInput({name, changeHandler} : FileInputProps) {
   return (
     <>
         <Box borderWidth="1px" p="2" rounded="md">
-            <Flex align="center" gap="4">
+            <Flex  align="center" gap="4">
         <Image  boxSize='16px' src={cameraIcon} alt="icon" objectFit="cover" />   
         <label style={{cursor: 'pointer'}}  htmlFor="inputTag">
         Select Image

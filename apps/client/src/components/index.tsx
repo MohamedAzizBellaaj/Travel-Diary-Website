@@ -1,6 +1,5 @@
 export * from './PasswordInput';
 export * from './FormButton';
-export * from './AvatarInput';
 export * from './FileInput';
 export * from '../pages/SignUpIn';
 export * from './AlotOfText';
