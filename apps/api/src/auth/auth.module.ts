@@ -7,11 +7,15 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Token } from './entities/auth.entity';
 import { LocalStrategy } from './local.strategy';
+import {MulterModule} from "@nestjs/platform-express";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Token]),
     UsersModule,
+    MulterModule.register({
+      dest: './uploads', // Specify the upload location
+    }),
     JwtModule.register({
       global: true,
       secret: 'int_to_win',

@@ -14,6 +14,6 @@ export class CreateUserDto {
   mail: string;
   @IsNotEmpty({ message: 'Password cant be empty' })
   password: string;
-  @IsNotEmpty()
   avatar: string;
+  coverPhoto: string;
 }

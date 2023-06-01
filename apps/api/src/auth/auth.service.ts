@@ -44,8 +44,13 @@ export class AuthService {
     };
   }
 
-  async register(user: CreateUserDto) {
-    console.log(user);
+  async register(user: CreateUserDto, avatar: string, cover:string) {
+    console.log("avatar");
+    console.log(avatar);
+    console.log("cover");
+    console.log(cover);
+    user.avatar=avatar;
+    user.coverPhoto=cover;
     const _user = await this.userService.emailExist(user.mail);
     if (!_user) {
       throw new NotAcceptableException('User Already exists');
@@ -80,5 +85,12 @@ export class AuthService {
     return {
       access_token: new_token,
     };
+  }
+
+  async getAvatar(userId:string) {
+    const user =  await this.userService.findOne(userId)
+    console.log(user)
+    return await user.avatar
+
   }
 }

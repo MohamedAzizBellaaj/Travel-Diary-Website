@@ -4,13 +4,17 @@ import {
   Get,
   Post,
   Req,
-  Request,
-  UseGuards,
+  Request, Res, UploadedFile, UploadedFiles,
+  UseGuards, UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
+import {FileFieldsInterceptor, FileInterceptor, FilesInterceptor} from "@nestjs/platform-express";
+import {diskStorage} from "multer";
+import {editFileName} from "../posts/entities/edit_file_name";
+import * as path from "path";
 
 @Controller('auth')
 export class AuthController {
@@ -28,10 +32,26 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() createUserDto: CreateUserDto): Promise<{}> {
+  @UseInterceptors(FileFieldsInterceptor(
+      [{name:"avatar"},{name:"cover"}],{
+        storage: diskStorage({
+          destination: './uploads',
+          filename: editFileName,
+        }),
+      }      ),
+  )
+  async register(@Body() createUserDto: CreateUserDto, @UploadedFiles() files: Array<Express.Multer.File>) {
+    let avatarName= ''
+    let coverName= ''
+        if(files["cover"]){
+      coverName = files["cover"][0].filename}
+        if(files["avatar"]){
+        avatarName = files["avatar"][0].filename}
+
     // @ts-ignore
-    return await this.authService.register(createUserDto);
+    return await this.authService.register(createUserDto,coverName,avatarName);
   }
+
 
   @UseGuards(AuthGuard)
   @Post('logout')

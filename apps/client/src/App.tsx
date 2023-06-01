@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import { SignUpIn } from './pages/SignUpIn';
 
 function App() {
+
   return (
     <>
       <Navbar />

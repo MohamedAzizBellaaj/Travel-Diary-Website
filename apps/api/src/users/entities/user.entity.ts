@@ -53,6 +53,11 @@ export class User {
   })
   avatar: string;
 
+  @Column({
+    type: 'varchar',
+  })
+  coverPhoto: string;
+
   @ManyToMany(() => User)
   @JoinTable()
   followers: User[];
