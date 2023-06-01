@@ -27,9 +27,9 @@ function PostDetails({ children }: PostDetailsProps) {
   // Fetch post using id
   const user: IUser = {
     id: '1',
-    userName: 'xXKyle420Xx',
-    firstName: 'Kyle',
-    lastName: 'El Chebi',
+    username: 'xXKyle420Xx',
+    firstname: 'Kyle',
+    lastname: 'El Chebi',
     bio: 'Sample Bio',
     avatar: avatar_image,
   };
@@ -70,7 +70,7 @@ function PostDetails({ children }: PostDetailsProps) {
     createdAt: new Date(),
   };
   const { title, images, text, location, createdAt } = post;
-  const { userName, firstName, lastName, bio, avatar } = { ...user };
+  const { username, firstname, lastname, bio, avatar } = { ...user };
   const coverImage = images && images[0];
   const formattedDate = createdAt?.toLocaleDateString('fr-Fr', {
     day: 'numeric',
@@ -101,8 +101,8 @@ function PostDetails({ children }: PostDetailsProps) {
             <Avatar
               height='120'
               width='120'
-              name={userName}
-              src={avatar}
+              borderRadius='full'
+              name={username}
               bottom='12'
               left='-3'
               marginRight='4'
@@ -110,7 +110,7 @@ function PostDetails({ children }: PostDetailsProps) {
           </Link>
           <Box marginRight='auto'>
             <Text>
-              {firstName} {lastName} (@{userName})
+              {firstname} {lastname} (@{username})
             </Text>
             <Divider
               borderWidth='1px'

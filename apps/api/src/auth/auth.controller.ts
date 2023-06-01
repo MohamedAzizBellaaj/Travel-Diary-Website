@@ -48,11 +48,11 @@ export class AuthController {
     let avatar = '';
     let coverPhoto = '';
     if (files) {
-      if (files['coverPhoto']) {
-        coverPhoto = files['coverPhoto'][0].filename;
-      }
       if (files['avatar']) {
         avatar = files['avatar'][0].filename;
+      }
+      if (files['coverPhoto']) {
+        coverPhoto = files['coverPhoto'][0].filename;
       }
     }
     return await this.authService.register(createUserDto, avatar, coverPhoto);

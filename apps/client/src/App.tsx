@@ -11,7 +11,6 @@ import { SignUpIn } from './pages/SignUpIn';
 import { AddPostForm } from './components';
 
 function App() {
-
   return (
     <>
       <Navbar />
@@ -29,14 +28,14 @@ function App() {
           element={<PostDetails />}
         />
         <Route
-          path='/profile/:id'
+          path='/profile/:userId'
           element={<Profile />}
         />
         <Route
           path='/signin'
           element={<SignUpIn />}
         />
-         <Route
+        <Route
           path='/addpost'
           element={<AddPostForm />}
         />

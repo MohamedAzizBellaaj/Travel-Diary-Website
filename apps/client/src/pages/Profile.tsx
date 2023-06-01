@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import eiffelTower from '../assets/eiffel-tower.webp';
-import avatar_image from '../assets/avatar.jpg';
 
 import { Avatar, Box, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import IUser from '../models/IUser';
@@ -9,23 +8,28 @@ import IComment from '../models/IComment';
 import IPost from '../models/IPost';
 import ITag from '../models/ITag';
 import PostCard from '../components/PostCard';
+import axios from 'axios';
+import getUploadsURI from '../utils/getUploadsURI';
 
 interface ProfileProps {
   children?: ReactNode;
 }
 
 function Profile({ children }: ProfileProps) {
-  const { id } = useParams();
-  // Fetch post using id
-  const user: IUser = {
-    id: '1',
-    userName: 'xXKyle420Xx',
-    firstName: 'Kyle',
-    lastName: 'El Chebi',
-    bio: 'Sample Bio',
-    avatar: avatar_image,
-    coverPhoto: eiffelTower,
-  };
+  const { userId } = useParams();
+  console.log(userId);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${userId}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   const comments: IComment[] = [
     {
       id: '1',
@@ -62,10 +66,14 @@ function Profile({ children }: ProfileProps) {
     tags: tags,
     createdAt: new Date(),
   };
-  const { userName, firstName, lastName, bio, avatar, coverPhoto } = {
-    ...user,
-  };
+  const { username, firstname, lastname, bio, avatar, coverPhoto } =
+    user as IUser;
+  const avatarLink = getUploadsURI() + avatar;
+  console.log(avatarLink);
+  const coverPhotoLink = getUploadsURI() + coverPhoto;
+  console.log(coverPhotoLink);
   const posts = new Array(8).fill(post);
+
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <Flex
@@ -80,19 +88,20 @@ function Profile({ children }: ProfileProps) {
         marginBottom='4'
       >
         <Image
-          src={coverPhoto}
+          src={coverPhotoLink}
           alt='cover image'
           w='100%'
           h='100%'
           objectFit='cover'
         />
         <Flex flexDirection='row'>
-          <Link to={`/profile/${user.id}`}>
+          <Link to={`/profile/${userId}`}>
             <Avatar
               height='120'
               width='120'
-              name={userName}
-              src={avatar}
+              borderRadius='full'
+              name={username}
+              src={avatarLink}
               bottom='12'
               left='-3'
               marginRight='4'
@@ -100,7 +109,7 @@ function Profile({ children }: ProfileProps) {
           </Link>
           <Box marginRight='auto'>
             <Text>
-              {firstName} {lastName} (@{userName})
+              {firstname} {lastname} (@{username})
             </Text>
             <Divider
               borderWidth='1px'
