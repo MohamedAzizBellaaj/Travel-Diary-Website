@@ -57,7 +57,7 @@ function PostDetails({ children }: PostDetailsProps) {
     id: '42',
     title: 'Paris',
     text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
-    images: [
+    image: [
       eiffelTower,
       'https://placehold.co/800?text=Hello+World&font=roboto',
       'https://placehold.co/840?text=Hello&font=roboto',
@@ -65,18 +65,10 @@ function PostDetails({ children }: PostDetailsProps) {
     ],
     user: user,
     location: 'France',
-    comments: comments,
-    tags: tags,
-    createdAt: new Date(),
   };
-  const { title, images, text, location, createdAt } = post;
+  const { title, image, text, location } = post;
   const { username, firstname, lastname, bio, avatar } = { ...user };
-  const coverImage = images && images[0];
-  const formattedDate = createdAt?.toLocaleDateString('fr-Fr', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  const coverImage = image && image[0];
   return (
     <Flex
       flexDirection='column'
@@ -116,7 +108,6 @@ function PostDetails({ children }: PostDetailsProps) {
               borderWidth='1px'
               borderColor='#0F4C81'
             />
-            <Text>{formattedDate}</Text>
           </Box>
           <HStack
             spacing='4'

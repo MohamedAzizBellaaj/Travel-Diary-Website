@@ -24,7 +24,7 @@ function App() {
           element={<Feed />}
         />
         <Route
-          path='/details/:id'
+          path='/details/:postId'
           element={<PostDetails />}
         />
         <Route

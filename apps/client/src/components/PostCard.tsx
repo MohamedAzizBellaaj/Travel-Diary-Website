@@ -11,9 +11,11 @@ export interface PostCardProps {
 
 function PostCard({ post }: PostCardProps) {
   const { id, title, image, text, user } = post;
+  console.log(user);
   const postImages = image.map((x) => getUploadsURI() + x.image);
   const truncatedText = text?.slice(0, 300) + '...';
-  const { username, avatarLink } = user;
+  const { username, avatar } = user;
+  const avatarLink = getUploadsURI() + avatar;
   return (
     <Link to={`/details/${id}`}>
       <Box

@@ -12,7 +12,7 @@ function Feed({ children }: FeedProps) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     axios
-      .get(`/api/posts/`)
+      .get(`/api/posts/all`)
       .then((response) => {
         setPosts(response.data);
       })
@@ -20,6 +20,8 @@ function Feed({ children }: FeedProps) {
         console.error(error);
       });
   }, []);
+  console.log(posts);
+  
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <>

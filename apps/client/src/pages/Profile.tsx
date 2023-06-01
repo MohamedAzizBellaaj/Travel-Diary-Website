@@ -43,11 +43,12 @@ function Profile({ children }: ProfileProps) {
     firstname,
     lastname,
     bio,
-    avatarLink,
-    coverPhotoLink,
+    avatar,
+    coverPhoto,
   };
   const userPosts = posts.map((post) => (post.user = myUser));
   console.log(userPosts);
+  console.log(posts);
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <Flex
