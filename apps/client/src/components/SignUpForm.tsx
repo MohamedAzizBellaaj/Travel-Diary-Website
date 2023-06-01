@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PasswordInput, FormButton, AlotOfText } from '.';
 import { TextInput } from './TextInput';
-import { FormLabel } from '@chakra-ui/react';
+import { Flex, FormLabel } from '@chakra-ui/react';
 import FileControl from './FileControl';
 import axios from 'axios';
 interface FormState {
@@ -29,7 +29,6 @@ export function SignUpForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
     }));
   };
   const handleSubmit = async (event) => {
@@ -65,6 +64,8 @@ export function SignUpForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+    <Flex flexDirection="column" alignItems="center">
+
         <FileControl
           index={0}
           onChange={(file) => handleImageChange(file, 'avatar')}
@@ -77,7 +78,6 @@ export function SignUpForm() {
         <FormLabel>First name</FormLabel>
         <TextInput
           name='firstname'
-          value={formState.firstname}
           changeHandler={handleChange}
           type='text'
           placeholder='First name'
@@ -86,7 +86,6 @@ export function SignUpForm() {
 
         <TextInput
           name='lastname'
-          value={formState.lastname}
           changeHandler={handleChange}
           type='text'
           placeholder='Last name'
@@ -95,7 +94,6 @@ export function SignUpForm() {
 
         <TextInput
           name='username'
-          value={formState.username}
           changeHandler={handleChange}
           type='text'
           placeholder='Username'
@@ -103,7 +101,6 @@ export function SignUpForm() {
         <FormLabel>bio</FormLabel>
         <AlotOfText
           name='bio'
-          value={formState.bio}
           changeHandler={handleChange}
           placeholder='tell us about you !'
         />
@@ -111,7 +108,6 @@ export function SignUpForm() {
         <FormLabel>Mail</FormLabel>
         <TextInput
           name='mail'
-          value={formState.mail}
           changeHandler={handleChange}
           type='email'
           placeholder='Email address'
@@ -121,9 +117,9 @@ export function SignUpForm() {
         <PasswordInput
           name='password'
           changeHandler={handleChange}
-          value={formState.password}
         />
         <FormButton text='Continue' />
+        </Flex>
       </form>
     </>
   );

@@ -12,7 +12,7 @@ export function FormButton({ text }: FormButtonProps) {
   height='48px'
   width='200px'
   border='2px'
-  borderColor='green.500'
+  borderColor='blue.500'
   type="submit"
 >
   {text}

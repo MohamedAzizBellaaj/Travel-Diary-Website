@@ -1,6 +1,7 @@
 import { TextInput } from './TextInput';
 import { FormButton, PasswordInput } from '.';
 import { useState } from 'react';
+import { Flex } from '@chakra-ui/react';
 interface FormState {
   password: string;
   email: string;
@@ -32,13 +33,14 @@ export function SignInForm() {
   return (
     <> 
     <form onSubmit={handleSubmit}>
+    <Flex flexDirection="column" alignItems="center">
       <TextInput  value={formState.email} changeHandler={handleChange} placeholder='Email address' type='email'/>
       <br />
       <PasswordInput value={formState.password} changeHandler={handleChange}  />
       <br />
       <FormButton text="Continue"/>
 
-   
+   </Flex>
 
     </form>
     </>
