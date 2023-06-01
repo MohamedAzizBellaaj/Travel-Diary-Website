@@ -55,7 +55,8 @@ export class AuthController {
         coverPhoto = files['coverPhoto'][0].filename;
       }
     }
-    return await this.authService.register(createUserDto, avatar, coverPhoto);
+    const user = await this.authService.register(createUserDto, avatar, coverPhoto);
+    return await this.authService.login(user.newUser)
   }
 
   @UseGuards(AuthGuard)
