@@ -10,12 +10,13 @@ import { Box, Button, Center, Input,
 import CountryDropdown from './CountriesDropdown';
 import FileControl from './FileControl';
 import TagInput from './TagInput';
+import axios from 'axios';
 // import { Textarea } from '@chakra-ui/react';
 interface FormState {
   title:string,
   text: string,
-  country:string,
-  images:  File[],
+  location:string,
+  files:  File[],
   // tags: string[]
  
 }
@@ -25,8 +26,8 @@ export function AddPostForm() {
   const [formState, setFormState] = useState<FormState>({
     title:'',
     text: '',
-    country:'',
-    images:[null, null,null,null,null],
+    location:'',
+    files:[null, null,null,null,null],
     // tags:[ ]
 
   });
@@ -40,21 +41,46 @@ export function AddPostForm() {
     console.log(formState);
 
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
+    const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVuaUBlbmkuZW5pIiwidXNlcklkIjoiNjFiOTNjN2QtYzI3YS00MmY3LTkyMmItZDZmN2YwY2Y5NjNkIiwiaWF0IjoxNjg1NjQzOTgxLCJleHAiOjE2ODU2NDc1ODF9.w1BJn8rJqXBmrUYklLQWDhmQ2BC2J6hFDuAForQAwbA'
+    const formData = new FormData();
     console.log(formState);
+    
+    for (const [key, value] of Object.entries(formState)) {
+      formData.append(key, value);
+      console.log(key);
+      
+      if(key=="files"){
+        for ( const file of value ){
+          formData.append("files", file);
+        }
+      }
+     
+    }
+    
+      const response = await axios.post(
+        '/api/posts',
+        formData, {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        }
+      ).then(( response ) => {
+        console.log( response )
+      } ).catch()
+    
+   
     
   };
   const handleImageChange = (file,index) => {
     setFormState((prevState) =>{ 
-      const updatedImages=[...prevState.images];
+      const updatedImages=[...prevState.files];
       updatedImages[index]=file
-      console.log(index, file);
-      console.log(updatedImages);
       return(
       {
       ...prevState,
-      images:updatedImages,
+      files:updatedImages,
       
     })}
     );
@@ -72,7 +98,7 @@ export function AddPostForm() {
     <Tabs size='md' variant='enclosed'>
   <TabList>
     <Tab>Tell us your story</Tab>
-    <Tab>Upload images</Tab>
+    <Tab>Upload files</Tab>
     <Tab>Add some tags</Tab>
   </TabList>
   <form onSubmit={handleSubmit}>
@@ -91,7 +117,7 @@ name="title" value={formState.title} onChange={handleChange} type= "text" placeh
     </TabPanel>
     <TabPanel>
       <Center> 
-        { formState.images.map((img, index)=>{
+        { formState.files.map((img, index)=>{
       return (
      
       <FileControl index={index} onChange={handleImageChange}/>
@@ -104,7 +130,7 @@ name="title" value={formState.title} onChange={handleChange} type= "text" placeh
 
     </TabPanel>
     <TabPanel>
-    <CountryDropdown onChange={handleChange} name="country" />
+    <CountryDropdown onChange={handleChange} name="location" />
     <TagInput />
     <FormButton text="Share !"/>
   
