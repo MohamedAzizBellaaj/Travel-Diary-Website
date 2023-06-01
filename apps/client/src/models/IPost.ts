@@ -1,15 +1,8 @@
-import IComment from './IComment';
-import ITag from './ITag';
-import IUser from './IUser';
-
 export default interface IPost {
   id?: string;
   title?: string;
-  images?: string[];
+  image?: any;
   text?: string;
-  user?: IUser;
+  user?: any;
   location?: string;
-  comments?: IComment[];
-  tags?: ITag[];
-  createdAt?: Date;
 }
