@@ -2,17 +2,18 @@ import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
 import React from "react"
 
 interface PasswordInputProps {
-  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-
+  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+name: string
 }
 
-export function PasswordInput({ changeHandler}: PasswordInputProps) {
+export function PasswordInput({ name,changeHandler}: PasswordInputProps) {
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
 
   return (
     <InputGroup size='md'>
       <Input
+      name={name}
       variant='flushed'
         // pr='4.5rem'
         type={show ? 'text' : 'password'}

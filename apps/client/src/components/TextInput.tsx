@@ -4,13 +4,13 @@ interface TextInputProps {
   type: string;
   placeholder: string;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-
+  name:string;
 }
 
-export function TextInput({ type, placeholder,changeHandler }: TextInputProps) {
+export function TextInput({ name, type, placeholder,changeHandler }: TextInputProps) {
   return (
     <>
-      <Input variant='flushed' type= {type} placeholder={ placeholder } 
+      <Input variant='flushed' name={name} type= {type} placeholder={ placeholder } 
       onChange={changeHandler } /> 
       
     </>

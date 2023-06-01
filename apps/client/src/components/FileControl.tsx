@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box,  FormControl, Image } from '@chakra-ui/react';
 import { FileInput } from '.';
 
-function FileControl({ onChange }) {
+function FileControl({ name, onChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
@@ -28,7 +28,7 @@ function FileControl({ onChange }) {
       )}
 
 
-      <FileInput changeHandler={handleFileChange}/>
+      <FileInput name ={name} changeHandler={handleFileChange}/>
 
       
     </FormControl>

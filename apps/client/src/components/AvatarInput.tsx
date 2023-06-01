@@ -2,19 +2,14 @@ import { Button } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import FileControl from './FileControl';
 
-// interface AvatarInputProps {
-//   children: ReactNode;
-// }
-// { children }: AvatarInputProps
 
 
-
-export function AvatarInput({changeHandler}) {
+export function AvatarInput({name ,changeHandler}) {
   
   return (
     <>
         
-      <FileControl onChange={changeHandler} />
+      <FileControl name={name} onChange={changeHandler} />
           
     </>
   );
