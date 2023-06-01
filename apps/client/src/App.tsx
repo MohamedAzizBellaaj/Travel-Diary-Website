@@ -33,7 +33,7 @@ function App() {
         />
          <Route
           path='/signin'
-          element={<SignInUp />}
+          element={<SignUpIn />}
         />
       </Routes>
 
