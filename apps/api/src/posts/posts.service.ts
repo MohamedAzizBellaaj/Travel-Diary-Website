@@ -38,21 +38,24 @@ export class PostsService {
 
   async findAllWithUserAndImages(): Promise<Post[]> {
     return this.postRepository
-        .createQueryBuilder('post')
-        .leftJoinAndSelect('post.user', 'user')
-        .leftJoinAndSelect('post.image', 'image')
-        .getMany();
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.image', 'image')
+      .getMany();
   }
   async findAllPostsWithImages(): Promise<Post[]> {
     return await this.postRepository
-        .createQueryBuilder('post')
-        .leftJoinAndSelect('post.image', 'image')
-        .getMany();
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.image', 'image')
+      .getMany();
   }
 
-
   async findOne(id: string) {
-    return await this.postRepository.findOne({ where: [{ id: id }] });
+    return await this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .where('post.user.id = :id', { id })
+      .getOne();
   }
   // async findPostByUser(id: string) {
   //   const user = await this.userService.findOne(id)
@@ -61,19 +64,19 @@ export class PostsService {
 
   async findOneWithImages(id: string): Promise<Post> {
     return this.postRepository
-        .createQueryBuilder('post')
-        .leftJoinAndSelect('post.image', 'image')
-        .where('post.id = :id', { id })
-        .getOne();
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.image', 'image')
+      .leftJoinAndSelect('post.user', 'user')
+      .where('post.id = :id', { id })
+      .getOne();
   }
-
 
   async findPostsByUserId(userId: string): Promise<Post[]> {
     return this.postRepository
-        .createQueryBuilder('post')
-        .leftJoinAndSelect('post.image', 'image')
-        .where('post.user.id = :userId', { userId })
-        .getMany();
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.image', 'image')
+      .where('post.user.id = :userId', { userId })
+      .getMany();
   }
   update(id: number, updatePostDto: UpdatePostDto) {
     return `This action updates a #${id} post`;
