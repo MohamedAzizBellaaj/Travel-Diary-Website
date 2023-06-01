@@ -6,7 +6,7 @@ export class PostTag {
     @PrimaryGeneratedColumn("uuid")
     id: number;
 
-    @Column()
+    @Column( )
     text: string
 
     @ManyToOne(()=>Post,post=>post.tags)

@@ -24,7 +24,7 @@ export class AuthController {
     async register(
         @Body()  createUserDto: CreateUserDto ,
     ): Promise<{}> {
-        console.log(createUserDto)
+
         // @ts-ignore
         return await this.authService.register(createUserDto);
     }
@@ -33,7 +33,6 @@ export class AuthController {
     @Post('logout')
     async logout(@Req() req) {
         const token = req.headers['auth-user'];
-        console.log(token)
         const res = await this.authService.delete(token)
         return res.affected == 1
     }
