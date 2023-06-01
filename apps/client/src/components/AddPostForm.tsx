@@ -1,7 +1,7 @@
 import {  useState } from 'react';
 import { PasswordInput, FormButton, AvatarInput, AlotOfText } from '.';
 import { TextInput } from './TextInput';
-import { Box, Button, Center, FormLabel, Image, Input,
+import { Box, Button, Center, Flex, FormLabel, Image, Input,
   Tab,
   TabList,
   TabPanel,
@@ -77,10 +77,13 @@ export function AddPostForm() {
       height="50vh"/>
     </TabPanel>
     <TabPanel>
+      <Center> 
       <FileControl name="image"  onChange={handleImageChange}/>
       <FileControl name="image"  onChange={handleImageChange}/>
       <FileControl name="image"  onChange={handleImageChange}/>
       <FileControl name="image"  onChange={handleImageChange}/>
+      </Center> 
+
     </TabPanel>
     <TabPanel>
     <CountryDropdown onChange={handleChange} name="country" />
