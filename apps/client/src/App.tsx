@@ -8,6 +8,7 @@ import PostDetails from './pages/PostDetails';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 import { SignUpIn } from './pages/SignUpIn';
+import { AddPostForm } from './components';
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
          <Route
           path='/signin'
           element={<SignUpIn />}
+        />
+         <Route
+          path='/addpost'
+          element={<AddPostForm />}
         />
       </Routes>
 

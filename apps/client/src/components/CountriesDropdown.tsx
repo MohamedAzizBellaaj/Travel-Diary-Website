@@ -1,6 +1,6 @@
 import { Select, Box } from '@chakra-ui/react';
 
-function CountryDropdown({  onChange }) {
+function CountryDropdown({  name,onChange }) {
   const countries = [
     'United States',
     'Canada',
@@ -9,7 +9,7 @@ function CountryDropdown({  onChange }) {
 
   return (
     <Box>
-      <Select  onChange={onChange}>
+      <Select  name={name} onChange={onChange}>
         {countries.map((country) => (
           <option key={country} >
             {country}
