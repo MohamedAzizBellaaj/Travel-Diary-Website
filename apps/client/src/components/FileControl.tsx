@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { Box,  Flex,  FormControl, Image, Input } from '@chakra-ui/react';
-import { FileInput } from '.';
-import cameraIcon from "../assets/camera-icon.png"
+
 import uploadPhoto from "../assets/upload_photo.png"
 
 
-function FileControl({ name, onChange }) {
+function FileControl({  index, onChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (index=0,event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-    onChange(file);
-  console.log(file);
-
+    onChange(file,index);
+    console.log(file);
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result);
@@ -32,8 +30,8 @@ function FileControl({ name, onChange }) {
         backgroundSize='cover'
       backgroundPosition='center'boxSize='150px' >
         <label style={{cursor: 'pointer', color:'transparent'}}  htmlFor="inputTag">
-        Select Image
-        <Input name ={name} style={{display: 'none'}} id="inputTag" type="file" onChange={handleFileChange} />
+        Select Image 
+        <Input  style={{display: 'none'}} id="inputTag" type="file" onChange={(e) => handleFileChange(index, e)} />
       </label>
       </Flex>
 }

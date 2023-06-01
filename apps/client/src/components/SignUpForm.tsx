@@ -36,11 +36,12 @@ export function SignUpForm() {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formState);
     return new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(formState, null, 2))
         resolve()
-      }, 3000)
+      }, 1000)
     })
   };
   const handleImageChange = (file) => {
@@ -50,13 +51,12 @@ export function SignUpForm() {
       avatar: file,
     }));
     console.log(file);
-    console.log(formState);
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
       
-      <FileControl name="avatar" value={formState.avatar} onChange={handleImageChange} />
+      <FileControl  index= {0} onChange={handleImageChange} />
 
       <FormLabel>First name</FormLabel>
       <TextInput name="firstName" value={formState.firstName} changeHandler={handleChange } type ="text" placeholder='First name' />
