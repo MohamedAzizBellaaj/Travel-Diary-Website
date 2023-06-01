@@ -1,31 +1,33 @@
-import {Injectable} from '@nestjs/common';
-import {CreatePostDto} from './dto/create-post.dto';
-import {UpdatePostDto} from './dto/update-post.dto';
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
-import {Post} from "./entities/post.entity";
-import {UsersService} from "../users/users.service";
-import {PostImage} from "./entities/post_image.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UsersService } from '../users/users.service';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { Post } from './entities/post.entity';
+import { PostImage } from './entities/post_image.entity';
 
 @Injectable()
 export class PostsService {
   constructor(
-      @InjectRepository(Post)
-      private postRepository: Repository<Post>,
-      @InjectRepository(PostImage)
-      private postImageRepository: Repository<PostImage>,
+    @InjectRepository(Post)
+    private postRepository: Repository<Post>,
+    @InjectRepository(PostImage)
+    private postImageRepository: Repository<PostImage>,
 
-      private userService: UsersService,
-
+    private userService: UsersService,
   ) {}
-  async create(createPostDto: CreatePostDto,userId:string,files :Array<Express.Multer.File>) {
-    createPostDto.images=[]
+  async create(
+    createPostDto: CreatePostDto,
+    userId: string,
+    files: Array<Express.Multer.File>,
+  ) {
+    createPostDto.images = [];
 
-    createPostDto.user= await this.userService.findOne(userId)
-    const post  = await this.postRepository.save(createPostDto)
+    createPostDto.user = await this.userService.findOne(userId);
+    const post = await this.postRepository.save(createPostDto);
     for (const file of files) {
-    await this.postImageRepository.save({ "image":file.filename,post:post})
-
+      await this.postImageRepository.save({ image: file.filename, post: post });
     }
     return post;
   }

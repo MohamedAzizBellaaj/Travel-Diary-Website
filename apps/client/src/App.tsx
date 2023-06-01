@@ -12,7 +12,6 @@ import { SignUpIn } from './pages/SignUpIn';
 function App() {
   return (
     <>
-
       <Navbar />
       <Routes>
         <Route
@@ -31,12 +30,11 @@ function App() {
           path='/profile/:id'
           element={<Profile />}
         />
-         <Route
+        <Route
           path='/signin'
           element={<SignUpIn />}
         />
       </Routes>
-
     </>
   );
 }
