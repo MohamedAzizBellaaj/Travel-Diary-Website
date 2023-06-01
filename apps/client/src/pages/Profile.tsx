@@ -1,25 +1,30 @@
 import { ReactNode } from 'react';
 import eiffelTower from '../assets/eiffel-tower.webp';
-import avatar from '../assets/avatar.jpg';
-import { Flex } from '@chakra-ui/react';
+import avatar_image from '../assets/avatar.jpg';
+
+import { Avatar, Box, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import IUser from '../models/IUser';
+import { Link, useParams } from 'react-router-dom';
+import IComment from '../models/IComment';
 import IPost from '../models/IPost';
 import ITag from '../models/ITag';
-import IComment from '../models/IComment';
 import PostCard from '../components/PostCard';
-import AddPost from '../components/AddPost';
 
-interface FeedProps {
+interface ProfileProps {
   children?: ReactNode;
 }
 
-function Feed({ children }: FeedProps) {
+function Profile({ children }: ProfileProps) {
+  const { id } = useParams();
+  // Fetch post using id
   const user: IUser = {
+    id: 1,
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',
     lastName: 'El Chebi',
     bio: 'كي الزير المتكي، لا إضحك لايبكي. عريان الترمة في صبعو خاتم. سارق في يدو شمعة. عزوزة شدت سارق. بات يحلم بعنبة، مات جابولوا عنقود. تعلم الحجامة على ريوس الإتاماء. الفم الحارك، الزك البارك.',
-    avatar: avatar,
+    avatar: avatar_image,
+    backgroundImage: eiffelTower,
   };
   const comments: IComment[] = [
     {
@@ -57,20 +62,72 @@ function Feed({ children }: FeedProps) {
     tags: tags,
     createdAt: new Date(),
   };
+  const { userName, firstName, lastName, bio, avatar, backgroundImage } = {
+    ...user,
+  };
+  const coverImage = backgroundImage;
   const posts = new Array(8).fill(post);
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
-    <>
-      <AddPost />
-      <Flex
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
+    <Flex
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+    >
+      <Box
+        background='gray.200'
+        width='60vw'
+        height='50vh'
+        marginBottom='4'
       >
-        {postElements}
-      </Flex>
-    </>
+        <Image
+          src={coverImage}
+          alt='cover image'
+          w='100%'
+          h='100%'
+          objectFit='cover'
+        />
+        <Flex flexDirection='row'>
+          <Link to={`/profile/${user.id}`}>
+            <Avatar
+              height='120'
+              width='120'
+              name={userName}
+              src={avatar}
+              bottom='12'
+              left='-3'
+              marginRight='4'
+            />
+          </Link>
+          <Box marginRight='auto'>
+            <Text>
+              {firstName} {lastName} (@{userName})
+            </Text>
+            <Divider
+              borderWidth='1px'
+              borderColor='#0F4C81'
+            />
+          </Box>
+        </Flex>
+        <Box
+          padding='5rem 10rem'
+          border='2px solid #D2B48C'
+          boxShadow='10px 11px 4px rgba(0, 0, 0, 0.25);'
+          borderRadius='12rem'
+          marginBottom='4'
+        >
+          <Text>{bio}</Text>
+        </Box>
+        <Flex
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+        >
+          {postElements}
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
 
-export default Feed;
+export default Profile;

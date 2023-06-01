@@ -1,38 +1,35 @@
-import {Body, Controller, Get, Post, Req, UnauthorizedException} from '@nestjs/common';
+import {Body, Controller, Get, Post, Req, Request, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
 import {AuthService} from './auth.service';
-import {User} from "../users/entities/user.entity";
 import {CreateUserDto} from "../users/dto/create-user.dto";
-import {UsersService} from "../users/users.service";
-import {verify} from "jsonwebtoken";
+import {LocalAuthGuard} from "./local-auth.guard";
+import {AuthGuard} from "./auth.guard";
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService,private userService: UsersService) {}
+    constructor(private authService: AuthService) {
+    }
 
+
+    @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(
-        @Body() body: { mail: string; password: string },
+       @Body() body :{mail: string,password:string},@Req() req
     ): Promise<{}> {
-        const { mail, password } = body;
-
-        const user = await this.authService.validateUser(mail,password  );
-
-        if (!user) {
-            return { message: 'Invalid credentials' };
-        }
-        const token = await this.authService.login(user);
+        const token = await this.authService.login( req.user);
         await this.authService.create(token.access_token)
         return token;
     }
+
     @Post('register')
     async register(
-        @Body() body: { createUserDto:CreateUserDto },
-    ): Promise<{}>{
-        console.log(body)
-        //@ts-ignore
-        return await this.authService.register(body);
+        @Body()  createUserDto: CreateUserDto ,
+    ): Promise<{}> {
+        console.log(createUserDto)
+        // @ts-ignore
+        return await this.authService.register(createUserDto);
     }
 
+    @UseGuards(AuthGuard)
     @Post('logout')
     async logout(@Req() req) {
         const token = req.headers['auth-user'];
@@ -41,13 +38,18 @@ export class AuthController {
         return res.affected == 1
     }
 
+
     @Post('refresh_token')
     async refresh_token(@Req() req) {
         const token = req.headers['auth-user'];
-        console.log(token)
         return this.authService.refresh_token(token)
     }
 
+    @UseGuards(AuthGuard)
+    @Get("test")
+    hi_there(@Request() req){
+        return req.user
+    }
 
 
 }

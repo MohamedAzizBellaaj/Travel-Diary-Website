@@ -17,7 +17,6 @@ import {Comment} from "./comments/entities/comment.entity";
 import {CommentReaction} from "./comments/entities/comment_reaction.entity";
 import {PostTag} from "./posts/entities/post_tags.entity";
 import { AuthModule } from './auth/auth.module';
-import {AuthentificationMiddleware} from "./authentification/authentification.middleware";
 import {Token} from "./auth/entities/auth.entity";
 
 @Module({
@@ -50,11 +49,6 @@ import {Token} from "./auth/entities/auth.entity";
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule  implements NestModule  {
-    configure(consumer: MiddlewareConsumer) {
-        consumer
-            .apply(AuthentificationMiddleware).exclude("/auth/logout","/auth/login","/auth/refresh_token")
-            .forRoutes("/");
-    }
+export class AppModule {
 
 }
