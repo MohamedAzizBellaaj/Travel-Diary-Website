@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import IPost from '../models/IPost';
-import { Box, Text, Avatar } from '@chakra-ui/react';
+import { Box, Text, Avatar, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import getUploadsURI from '../utils/getUploadsURI';
 
 export interface PostCardProps {
   post: IPost;
@@ -9,25 +10,30 @@ export interface PostCardProps {
 }
 
 function PostCard({ post }: PostCardProps) {
-  const { id, title, images, text, user, tags } = post;
+  const { id, title, image, text, user } = post;
+  const postImages = image.map((x) => getUploadsURI() + x.image);
   const truncatedText = text?.slice(0, 300) + '...';
-  const { userName, avatar } = { ...user };
+  const { username, avatarLink } = user;
   return (
     <Link to={`/details/${id}`}>
       <Box
         borderRadius='2xl'
         overflow='hidden'
         boxShadow='lg'
+        w='50vw'
+        h='50vh'
         maxW='lg'
         position='relative'
         transition='all 0.2s ease-out'
         margin='2'
         _hover={{ transform: 'scale(1.05)' }}
       >
-        {images && (
-          <img
-            src={images[0]}
+        {postImages && (
+          <Image
+            src={postImages[0]}
             alt={title}
+            height='100%'
+            width='100%'
           />
         )}
         <Box
@@ -38,8 +44,8 @@ function PostCard({ post }: PostCardProps) {
         >
           <Avatar
             size='md'
-            name={userName}
-            src={avatar}
+            name={username}
+            src={avatarLink}
           />
         </Box>
         <Box
@@ -63,7 +69,7 @@ function PostCard({ post }: PostCardProps) {
             fontSize='lg'
             color='#33CCCC'
           >
-            {userName} wrote:
+            {username} wrote:
           </Text>
           <Text
             alignSelf='center'
@@ -80,25 +86,6 @@ function PostCard({ post }: PostCardProps) {
           >
             {truncatedText}
           </Text>
-          {tags && (
-            <Box marginTop='4'>
-              {tags.map((tag) => (
-                <Box
-                  key={tag.id}
-                  display='inline-block'
-                  borderRadius='full'
-                  bg='#33CCCC'
-                  color='white'
-                  fontSize='md'
-                  fontWeight='bold'
-                  padding='2'
-                  marginRight='2'
-                >
-                  {tag.name}
-                </Box>
-              ))}
-            </Box>
-          )}
         </Box>
       </Box>
     </Link>

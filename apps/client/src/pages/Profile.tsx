@@ -1,12 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
-import eiffelTower from '../assets/eiffel-tower.webp';
 
 import { Avatar, Box, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import IUser from '../models/IUser';
 import { Link, useParams } from 'react-router-dom';
-import IComment from '../models/IComment';
-import IPost from '../models/IPost';
-import ITag from '../models/ITag';
 import PostCard from '../components/PostCard';
 import axios from 'axios';
 import getUploadsURI from '../utils/getUploadsURI';
@@ -17,9 +13,8 @@ interface ProfileProps {
 
 function Profile({ children }: ProfileProps) {
   const { userId } = useParams();
-  console.log(userId);
   const [user, setUser] = useState({});
-
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     axios
       .get(`/api/users/${userId}`)
@@ -29,51 +24,30 @@ function Profile({ children }: ProfileProps) {
       .catch((error) => {
         console.error(error);
       });
+    axios
+      .get(`/api/posts/user/${userId}`)
+      .then((response) => {
+        setPosts(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
-  const comments: IComment[] = [
-    {
-      id: '1',
-      text: 'Nice wish you the best',
-      user: user,
-      heart: 0,
-    },
-    {
-      id: '2',
-      text: 'Very beautiful photos',
-      user: user,
-      heart: 2,
-    },
-  ];
-  const tags: ITag[] = [
-    { id: '1', name: 'Paris' },
-    { id: '2', name: 'Fun' },
-    { id: '3', name: 'Travel' },
-    { id: '4', name: 'Barcha Jaw' },
-  ];
-  const post: IPost = {
-    id: '42',
-    title: 'Paris',
-    text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
-    images: [
-      eiffelTower,
-      'https://placehold.co/800?text=Hello+World&font=roboto',
-      'https://placehold.co/840?text=Hello&font=roboto',
-      'https://placehold.co/840?text=Hi+Everyone&font=roboto',
-    ],
-    user: user,
-    location: 'France',
-    comments: comments,
-    tags: tags,
-    createdAt: new Date(),
-  };
+
   const { username, firstname, lastname, bio, avatar, coverPhoto } =
     user as IUser;
   const avatarLink = getUploadsURI() + avatar;
-  console.log(avatarLink);
   const coverPhotoLink = getUploadsURI() + coverPhoto;
-  console.log(coverPhotoLink);
-  const posts = new Array(8).fill(post);
-
+  const myUser = {
+    username,
+    firstname,
+    lastname,
+    bio,
+    avatarLink,
+    coverPhotoLink,
+  };
+  const userPosts = posts.map((post) => (post.user = myUser));
+  console.log(userPosts);
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <Flex
