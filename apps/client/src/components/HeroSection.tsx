@@ -5,6 +5,7 @@ import HeroText from './HeroText';
 
 function HeroSection() {
   return (
+
     <Box
       height='100vh'
       //  bgGradient='linear(to-r, blue.700, blue.200)'
