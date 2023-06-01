@@ -15,7 +15,7 @@ import {LocalStrategy} from "./local.strategy";
       global:true,
     secret: "int_to_win",
     signOptions: {
-      expiresIn: "10s",
+      expiresIn: "3600s",
     }
   }),UsersModule,
   PassportModule

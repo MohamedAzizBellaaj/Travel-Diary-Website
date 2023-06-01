@@ -4,7 +4,7 @@ import {Post} from "./post.entity";
 @Entity("post_image")
 @Index(["image", "post"], { unique: true })
 export class PostImage {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number;
     @Column()
     image:string;
@@ -12,3 +12,4 @@ export class PostImage {
     @ManyToOne(() => Post, post => post.reactions)
     post: Post;
 }
+

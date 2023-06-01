@@ -24,20 +24,21 @@ export class Post {
         type: "varchar"
     })
     location: string;
-    @OneToMany(()=> PostImage,image=>image.post)
+    @OneToMany(()=> PostImage,image=>image.post,{ cascade: ['insert', 'update'] })
     image:PostImage[]
 
-    @ManyToOne(() => User, user => user.posts)
+
+    @ManyToOne(() => User, user => user.posts,)
     user: User;
 
-    @OneToMany(() => PostReaction, reaction => reaction.post)
+    @OneToMany(() => PostReaction, reaction => reaction.post,{cascade:true})
     reactions: PostReaction[];
 
     @OneToMany(() => Comment, comment => comment.post)
     comments: Comment[];
 
 
-    @OneToMany(() => PostTag, tag => tag.post)
+    @OneToMany(() => PostTag, tag => tag.post,{cascade:true})
     tags: PostTag[];
 
 
