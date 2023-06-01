@@ -45,7 +45,7 @@ import { UsersModule } from './users/users.module';
         PostTag,
         Token,
       ],
-      logging: true,
+      logging: false,
     }),
     UsersModule,
     PostsModule,
