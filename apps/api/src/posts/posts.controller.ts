@@ -54,7 +54,7 @@ export class PostsController {
     return await this.postsService.findAllPostsWithImages();
   }
   @Get('all')
-  async findOneWithUserAndImages(@Param('id') id: string) {
+  async findOneWithUserAndImages() {
     return this.postsService.findAllWithUserAndImages();
   }
   @Get('getFile')
