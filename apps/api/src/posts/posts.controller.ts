@@ -62,17 +62,22 @@ export class PostsController {
       }),
     };
   }
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(id);
-  }
+
   @Get('user/:id')
-  findByUser(@Param('id') id: string) {
-
-    console.log(id)
-    return this.postsService.findPostByUser(id);
+  async findPostsByUserId(@Param('id') userId: string) {
+    return this.postsService.findPostsByUserId(userId);
   }
+  // findByUser(@Param('id') id: string) {
+  //
+  //   console.log(id)
+  //   return this.postsService.findPostByUser(id);
+  // }
 
+
+  @Get(':id')
+  async findOneWithImages(@Param('id') id: string) {
+    return this.postsService.findOneWithImages(id);
+  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(+id, updatePostDto);
