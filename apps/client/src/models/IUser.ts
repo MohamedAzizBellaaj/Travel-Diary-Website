@@ -9,7 +9,7 @@ export default interface IUser {
   mail?: string;
   password?: string;
   avatar?: string;
-  backgroundImage?: string;
+  coverPhoto?: string;
   toReadLater?: IPost[];
   favorites?: IPost[];
   follower?: IUser[];

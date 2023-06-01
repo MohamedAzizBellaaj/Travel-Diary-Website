@@ -24,7 +24,7 @@ function Profile({ children }: ProfileProps) {
     lastName: 'El Chebi',
     bio: 'Sample Bio',
     avatar: avatar_image,
-    backgroundImage: eiffelTower,
+    coverPhoto: eiffelTower,
   };
   const comments: IComment[] = [
     {
@@ -62,10 +62,9 @@ function Profile({ children }: ProfileProps) {
     tags: tags,
     createdAt: new Date(),
   };
-  const { userName, firstName, lastName, bio, avatar, backgroundImage } = {
+  const { userName, firstName, lastName, bio, avatar, coverPhoto } = {
     ...user,
   };
-  const coverImage = backgroundImage;
   const posts = new Array(8).fill(post);
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
@@ -81,7 +80,7 @@ function Profile({ children }: ProfileProps) {
         marginBottom='4'
       >
         <Image
-          src={coverImage}
+          src={coverPhoto}
           alt='cover image'
           w='100%'
           h='100%'
