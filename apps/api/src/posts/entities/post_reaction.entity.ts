@@ -1,28 +1,35 @@
-import {Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {User} from "../../users/entities/user.entity";
-import {Post} from "./post.entity";
+import {
+  Column,
+  Entity,
+  Index,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../../users/entities/user.entity';
+import { Post } from './post.entity';
 
-export enum PostReactType  {
-    LIKE = 'like',
-    DISLIKE = 'dislike',
-    NONE= "none"
+export enum PostReactType {
+  LIKE = 'like',
+  DISLIKE = 'dislike',
+  NONE = 'none',
 }
 
-@Entity("post_reaction")
-@Index(["user", "post"], { unique: true })
+@Entity('post_reaction')
+@Index(['user', 'post'], { unique: true })
 export class PostReaction {
-    @PrimaryGeneratedColumn("uuid")
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-    @Column({
-        type: "enum", enum:PostReactType,default:PostReactType.NONE
-    })
-    type: PostReactType;
+  @Column({
+    type: 'enum',
+    enum: PostReactType,
+    default: PostReactType.NONE,
+  })
+  type: PostReactType;
 
-    @ManyToOne(() => User, user => user.post_reactions)
-    user: User;
+  @ManyToOne(() => User, (user) => user.post_reactions)
+  user: User;
 
-    @ManyToOne(() => Post, post => post.reactions)
-    post: Post;
-
+  @ManyToOne(() => Post, (post) => post.reactions)
+  post: Post;
 }

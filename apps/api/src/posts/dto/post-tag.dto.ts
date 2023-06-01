@@ -1,6 +1,6 @@
-import {IsNotEmpty} from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
-export class PostTagDto  {
-    @IsNotEmpty()
-    text: string
+export class PostTagDto {
+  @IsNotEmpty()
+  text: string;
 }

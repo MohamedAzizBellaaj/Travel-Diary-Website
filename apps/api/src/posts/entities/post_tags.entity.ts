@@ -1,14 +1,14 @@
-import {Column, Entity,  ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {Post} from "./post.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from './post.entity';
 
-@Entity("post_tags")
+@Entity('post_tags')
 export class PostTag {
-    @PrimaryGeneratedColumn("uuid")
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-    @Column( )
-    text: string
+  @Column()
+  text: string;
 
-    @ManyToOne(()=>Post,post=>post.tags)
-    post:Post
+  @ManyToOne(() => Post, (post) => post.tags)
+  post: Post;
 }
