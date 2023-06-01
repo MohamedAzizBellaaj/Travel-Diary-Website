@@ -1,16 +1,15 @@
 import './App.css';
-import { AddPostForm } from './components';
+import Feed from './pages/Feed';
+
 import { SignUpIn } from './pages/SignUpIn';
-
-
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
     <>
-    {/* <LandingPage/> */}
+    <LandingPage/>
       {/* <Feed /> */}
-      <SignUpIn  />
-      {/* <AddPostForm /> */}
+      <SignUpIn />
     </>
   );
 }
