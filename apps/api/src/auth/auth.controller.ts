@@ -5,24 +5,17 @@ import {
   Post,
   Req,
   Request,
-  Res,
-  UploadedFile,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { editFileName } from '../posts/entities/edit_file_name';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
-import {
-  FileFieldsInterceptor,
-  FileInterceptor,
-  FilesInterceptor,
-} from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { editFileName } from '../posts/entities/edit_file_name';
-import * as path from 'path';
 
 @Controller('auth')
 export class AuthController {
@@ -41,7 +34,7 @@ export class AuthController {
 
   @Post('register')
   @UseInterceptors(
-    FileFieldsInterceptor([{ name: 'avatar' }, { name: 'cover' }], {
+    FileFieldsInterceptor([{ name: 'avatar' }, { name: 'coverPhoto' }], {
       storage: diskStorage({
         destination: './uploads',
         filename: editFileName,
@@ -52,21 +45,17 @@ export class AuthController {
     @Body() createUserDto: CreateUserDto,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
-    let avatarName = '';
-    let coverName = '';
-    if (files['cover']) {
-      coverName = files['cover'][0].filename;
+    let avatar = '';
+    let coverPhoto = '';
+    if (files) {
+      if (files['coverPhoto']) {
+        coverPhoto = files['coverPhoto'][0].filename;
+      }
+      if (files['avatar']) {
+        avatar = files['avatar'][0].filename;
+      }
     }
-    if (files['avatar']) {
-      avatarName = files['avatar'][0].filename;
-    }
-
-    // @ts-ignore
-    return await this.authService.register(
-      createUserDto,
-      coverName,
-      avatarName,
-    );
+    return await this.authService.register(createUserDto, avatar, coverPhoto);
   }
 
   @UseGuards(AuthGuard)
