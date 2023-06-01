@@ -16,7 +16,7 @@ interface FormState {
   text: string,
   country:string,
   images:  File[],
-  tags: string[]
+  // tags: string[]
  
 }
 
@@ -60,8 +60,10 @@ export function AddPostForm() {
     );
     
   };
+  
 
-
+ 
+ 
   
   return (
    
@@ -103,7 +105,7 @@ name="title" value={formState.title} onChange={handleChange} type= "text" placeh
     </TabPanel>
     <TabPanel>
     <CountryDropdown onChange={handleChange} name="country" />
-    <TagInput/>
+    <TagInput />
     <FormButton text="Share !"/>
   
     </TabPanel>
