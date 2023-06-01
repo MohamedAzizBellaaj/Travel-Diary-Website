@@ -11,7 +11,7 @@ const user: IUser = {
   userName: 'xXKyle420Xx',
   firstName: 'Kyle',
   lastName: 'El Chebi',
-  bio: 'كي الزير المتكي، لا إضحك لايبكي. عريان الترمة في صبعو خاتم. سارق في يدو شمعة. عزوزة شدت سارق. بات يحلم بعنبة، مات جابولوا عنقود. تعلم الحجامة على ريوس الإتاماء. الفم الحارك، الزك البارك.',
+  bio: 'Sample Bio',
   avatar: avatar,
 };
 const comments: IComment[] = [

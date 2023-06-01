@@ -18,11 +18,11 @@ function Profile({ children }: ProfileProps) {
   const { id } = useParams();
   // Fetch post using id
   const user: IUser = {
-    id: 1,
+    id: '1',
     userName: 'xXKyle420Xx',
     firstName: 'Kyle',
     lastName: 'El Chebi',
-    bio: 'كي الزير المتكي، لا إضحك لايبكي. عريان الترمة في صبعو خاتم. سارق في يدو شمعة. عزوزة شدت سارق. بات يحلم بعنبة، مات جابولوا عنقود. تعلم الحجامة على ريوس الإتاماء. الفم الحارك، الزك البارك.',
+    bio: 'Sample Bio',
     avatar: avatar_image,
     backgroundImage: eiffelTower,
   };
@@ -47,7 +47,7 @@ function Profile({ children }: ProfileProps) {
     { id: '4', name: 'Barcha Jaw' },
   ];
   const post: IPost = {
-    id: 42,
+    id: '42',
     title: 'Paris',
     text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
     images: [

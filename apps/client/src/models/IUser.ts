@@ -1,7 +1,7 @@
 import IPost from './IPost';
 
 export default interface IUser {
-  id?: number;
+  id?: string;
   userName?: string;
   firstName?: string;
   lastName?: string;
