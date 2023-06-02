@@ -39,9 +39,9 @@ const post: IPost = {
   text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
   images: [
     eiffelTower,
-    'https://placehold.co/800?text=Hello+World&font=roboto',
-    'https://placehold.co/840?text=Hello&font=roboto',
-    'https://placehold.co/840?text=Hi+Everyone&font=roboto',
+    // 'https://placehold.co/800?text=Hello+World&font=roboto',
+    // 'https://placehold.co/840?text=Hello&font=roboto',
+    // 'https://placehold.co/840?text=Hi+Everyone&font=roboto',
   ],
   user: user,
   location: 'France',
