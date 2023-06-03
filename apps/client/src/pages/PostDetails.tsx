@@ -1,7 +1,4 @@
 import { ReactNode } from 'react';
-import IPost from '../models/IPost';
-import eiffelTower from '../assets/eiffel-tower.webp';
-import avatar_image from '../assets/avatar.jpg';
 
 import {
   Avatar,
@@ -12,63 +9,38 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react';
-import IUser from '../models/IUser';
-import IComment from '../models/IComment';
-import ITag from '../models/ITag';
+
 import { Link, useParams } from 'react-router-dom';
 import ImageCarousel from '../components/ImageCarousel';
+import { useQuery } from '@tanstack/react-query';
+import getUploadsURI from '../utils/getUploadsURI';
 
 interface PostDetailsProps {
   children?: ReactNode;
 }
 
 function PostDetails({ children }: PostDetailsProps) {
-  const { id } = useParams();
+  const { postId } = useParams();
+  console.log(postId);
+  async function fetchData() {
+    const response = await fetch(`/api/posts/${postId}`);
+    const data = await response.json();
+    return data;
+  }
   // Fetch post using id
-  const user: IUser = {
-    id: '1',
-    username: 'xXKyle420Xx',
-    firstname: 'Kyle',
-    lastname: 'El Chebi',
-    bio: 'Sample Bio',
-    avatar: avatar_image,
-  };
-  const comments: IComment[] = [
-    {
-      id: '1',
-      text: 'Nice wish you the best',
-      user: user,
-      heart: 0,
-    },
-    {
-      id: '2',
-      text: 'Very beautiful photos',
-      user: user,
-      heart: 2,
-    },
-  ];
-  const tags: ITag[] = [
-    { id: '1', name: 'Paris' },
-    { id: '2', name: 'Fun' },
-    { id: '3', name: 'Travel' },
-    { id: '4', name: 'Barcha Jaw' },
-  ];
-  const post: IPost = {
-    id: '42',
-    title: 'Paris',
-    text: 'Sint aute cillum voluptate eiusmod nostrud eu proident ex nostrud elit proident anim labore in. Nostrud ad non dolor sit consectetur excepteur culpa veniam. Qui ipsum ex ut qui dolor ipsum fugiat id excepteur culpa. Duis reprehenderit do eu voluptate proident. Aliqua ex nulla magna commodo veniam elit ex.',
-    image: [
-      eiffelTower,
-      'https://placehold.co/800?text=Hello+World&font=roboto',
-      'https://placehold.co/840?text=Hello&font=roboto',
-      'https://placehold.co/840?text=Hi+Everyone&font=roboto',
-    ],
-    user: user,
-    location: 'France',
-  };
-  const { title, image, text, location } = post;
-  const { username, firstname, lastname, bio, avatar } = { ...user };
-  const coverImage = image && image[0];
+  const { data, isLoading } = useQuery({
+    queryKey: ['post'],
+    queryFn: () => fetchData(),
+  });
+  if (isLoading) {
+    return <Box>Loading...</Box>;
+  }
+  console.log(data);
+  const { title, image, text, location, user } = data;
+  const { username, firstname, lastname, bio, avatar, coverPhoto } = user;
+  const images = image && image.map((x) => getUploadsURI() + x.image);
+  const coverImage = getUploadsURI() + coverPhoto;
+  const avatarLink = getUploadsURI() + avatar
   return (
     <Flex
       flexDirection='column'
@@ -94,6 +66,7 @@ function PostDetails({ children }: PostDetailsProps) {
               height='120'
               width='120'
               borderRadius='full'
+              src={avatarLink}
               name={username}
               bottom='12'
               left='-3'

@@ -30,10 +30,10 @@ import { UsersModule } from './users/users.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
-      port: 3307,
+      port: 3306,
       username: 'root',
-      // password: process.env.DB_PASSWORD,
-      database: "travel_diary",
+      password: process.env.DB_PASSWORD,
+      database: 'travel_diary',
       synchronize: true,
       entities: [
         User,

@@ -9,10 +9,12 @@ import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 import { SignUpIn } from './pages/SignUpIn';
 import { AddPostForm } from './components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Navbar />
       <Routes>
         <Route
@@ -40,7 +42,7 @@ function App() {
           element={<AddPostForm />}
         />
       </Routes>
-    </>
+    </QueryClientProvider>
   );
 }
 

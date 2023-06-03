@@ -33,6 +33,8 @@ function ImageCarousel({ images }: ImageCarouselProps) {
         alignItems='center'
         justifyContent='center'
         borderRadius='2xl'
+        w='50vw'
+        h='50vh'
         overflow='hidden'
         boxShadow='lg'
         maxW='lg'
@@ -41,6 +43,9 @@ function ImageCarousel({ images }: ImageCarouselProps) {
         <Image
           src={images[currentImageIndex]}
           alt='Carousel Image'
+          height='100%'
+          width='100%'
+          objectFit='cover'
         />
         <IconButton
           icon={<ChevronLeftIcon />}

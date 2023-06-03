@@ -3,6 +3,7 @@ import { Flex } from '@chakra-ui/react';
 import PostCard from '../components/PostCard';
 import AddPost from '../components/AddPost';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 interface FeedProps {
   children?: ReactNode;
@@ -21,11 +22,13 @@ function Feed({ children }: FeedProps) {
       });
   }, []);
   console.log(posts);
-  
+
   const postElements = posts.map((post) => <PostCard post={post} />);
   return (
     <>
-      <AddPost />
+      <Link to='/addpost'>
+        <AddPost />
+      </Link>
       <Flex
         flexDirection='column'
         alignItems='center'
