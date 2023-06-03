@@ -11,6 +11,7 @@ import CountryDropdown from './CountriesDropdown';
 import FileControl from './FileControl';
 import TagInput from './TagInput';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 // import { Textarea } from '@chakra-ui/react';
 interface FormState {
   title:string,
@@ -23,6 +24,8 @@ interface FormState {
 
 
 export function AddPostForm() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [formState, setFormState] = useState<FormState>({
     title:'',
     text: '',
@@ -43,7 +46,9 @@ export function AddPostForm() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
-    const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVuaUBlbmkuZW5pIiwidXNlcklkIjoiNjFiOTNjN2QtYzI3YS00MmY3LTkyMmItZDZmN2YwY2Y5NjNkIiwiaWF0IjoxNjg1NjQzOTgxLCJleHAiOjE2ODU2NDc1ODF9.w1BJn8rJqXBmrUYklLQWDhmQ2BC2J6hFDuAForQAwbA'
+    let token=localStorage.getItem("access_token")
+     token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVuaUBlbmkuZW5pIiwidXNlcklkIjoiNjFiOTNjN2QtYzI3YS00MmY3LTkyMmItZDZmN2YwY2Y5NjNkIiwiaWF0IjoxNjg1NzUxOTczLCJleHAiOjE2ODU3NTU1NzN9.JhS1OHOEkVCKHbFTb0wqIp9XRv0d1AVzCa2vyOma868'
+
     const formData = new FormData();
     console.log(formState);
     
@@ -68,11 +73,18 @@ export function AddPostForm() {
         }
       ).then(( response ) => {
         console.log( response )
+      setIsSubmitted(true);
+        
+      postId=response.data.result['id']
+      console.log(postId
+        );
+      
       } ).catch()
     
    
     
   };
+  let postId=''
   const handleImageChange = (file,index) => {
     setFormState((prevState) =>{ 
       const updatedImages=[...prevState.files];
@@ -86,8 +98,11 @@ export function AddPostForm() {
     );
     
   };
-  
+  const navigate = useNavigate();
 
+if( isSubmitted)     navigate(`/details/${postId}`)
+
+// return <Navigate to={"/details/"+ postId} replace={true} />
  
  
   
