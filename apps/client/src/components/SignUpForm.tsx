@@ -4,6 +4,7 @@ import { TextInput } from './TextInput';
 import { FormLabel } from '@chakra-ui/react';
 import FileControl from './FileControl';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 interface FormState {
   firstname: string;
   lastname: string;
@@ -16,6 +17,8 @@ interface FormState {
 }
 
 export function SignUpForm() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
   const [formState, setFormState] = useState<FormState>({
     firstname: '',
     lastname: '',
@@ -34,12 +37,17 @@ export function SignUpForm() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(formState);
+    
     const formData = new FormData();
     for (const [key, value] of Object.entries(formState)) {
       formData.append(key, value);
+      
     }
     try {
       const response = await axios.post('/api/auth/register', formData);
+      setIsSubmitted(true);
+
     } catch (error) {
       console.error(error);
     }
@@ -62,6 +70,7 @@ export function SignUpForm() {
         break;
     }
   };
+  if(isSubmitted) return <Navigate to="/signin" replace={false} />
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -77,7 +86,6 @@ export function SignUpForm() {
         <FormLabel>First name</FormLabel>
         <TextInput
           name='firstname'
-          value={formState.firstname}
           changeHandler={handleChange}
           type='text'
           placeholder='First name'
@@ -86,7 +94,6 @@ export function SignUpForm() {
 
         <TextInput
           name='lastname'
-          value={formState.lastname}
           changeHandler={handleChange}
           type='text'
           placeholder='Last name'
@@ -95,7 +102,6 @@ export function SignUpForm() {
 
         <TextInput
           name='username'
-          value={formState.username}
           changeHandler={handleChange}
           type='text'
           placeholder='Username'
@@ -103,7 +109,6 @@ export function SignUpForm() {
         <FormLabel>bio</FormLabel>
         <AlotOfText
           name='bio'
-          value={formState.bio}
           changeHandler={handleChange}
           placeholder='tell us about you !'
         />
@@ -111,7 +116,6 @@ export function SignUpForm() {
         <FormLabel>Mail</FormLabel>
         <TextInput
           name='mail'
-          value={formState.mail}
           changeHandler={handleChange}
           type='email'
           placeholder='Email address'
@@ -121,7 +125,6 @@ export function SignUpForm() {
         <PasswordInput
           name='password'
           changeHandler={handleChange}
-          value={formState.password}
         />
         <FormButton text='Continue' />
       </form>

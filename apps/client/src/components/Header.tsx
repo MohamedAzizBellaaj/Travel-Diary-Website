@@ -1,5 +1,6 @@
 import { Flex, Box, Button } from '@chakra-ui/react';
 import logo from '../assets/logo.svg';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -11,10 +12,6 @@ export default function Header() {
       padding='1.5rem'
       bg='transparent'
       zIndex='1'
-      // position="absolute"
-      //   top="0"
-      //   left="0"
-      //   right="0"
     >
       <Box>
         <img
@@ -27,6 +24,8 @@ export default function Header() {
         display={{ base: 'none', md: 'flex' }}
         alignItems='center'
       >
+        <Link to='/signin'>
+
         <Button
           as='a'
           colorScheme='blue'
@@ -35,12 +34,16 @@ export default function Header() {
         >
           Login
         </Button>
+        </Link>
+        <Link to='/signin'>
         <Button
           as='a'
           colorScheme='blue'
         >
-          Register
+          Join 
         </Button>
+             
+            </Link>
       </Box>
     </Flex>
   );

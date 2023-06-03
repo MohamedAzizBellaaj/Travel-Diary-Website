@@ -1,8 +1,7 @@
 import ImageContainer from './ImageContainer';
-
 import PostCard from './PostCard';
 import SectionTitle from './SectionTitle';
-
+import Feed from '../pages/Feed'
 const ImageSection = ({ posts }) => {
   return (
     <>
@@ -10,11 +9,12 @@ const ImageSection = ({ posts }) => {
         title='Discover unique places to stay, experiences to try.'
         subTitle='Latest Stories'
       />
-      <ImageContainer>
+      {/* <ImageContainer>
         {posts.map((item) => (
           <PostCard post={item} />
         ))}
-      </ImageContainer>
+      </ImageContainer> */}
+      <Feed /> 
     </>
   );
 };
